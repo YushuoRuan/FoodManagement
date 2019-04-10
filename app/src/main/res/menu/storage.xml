@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_all"
+        android:icon="@drawable/ic_all_24dp"
+        android:title="All" />
+
+    <item
+        android:id="@+id/navigation_fridge"
+        android:icon="@drawable/ic_refrigerator"
+        android:title="Fridge" />
+
+    <item
+        android:id="@+id/navigation_frozen"
+        android:icon="@drawable/ic_frozen"
+        android:title="Frozen" />
+
+    <item
+        android:id="@+id/navigation_room"
+        android:icon="@drawable/ic_room"
+        android:title="Room" />
+
+</menu>

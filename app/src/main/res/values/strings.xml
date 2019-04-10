@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Food Management</string>
+    <string name="title_inventory">Inventory</string>
+    <string name="title_shopping_cart">Cart</string>
+    <string name="title_recipe">Recipe</string>
+
+    <string-array name="items">
+        <item>Apple</item>
+        <item>Banana</item>
+        <item>Cherry</item>
+        <item>Chicken wing</item>
+        <item>Ribeye</item>
+        <item>Pork Belly</item>
+        <item>Beef Brisket</item>
+        <item>Bok choy</item>
+        <item>Spinach</item>
+        <item>Lettuce</item>
+    </string-array>
+
+    <string-array name="Categories">
+        <item>Fruit</item>
+        <item>Fruit</item>
+        <item>Fruit</item>
+        <item>Meat</item>
+        <item>Meat</item>
+        <item>Meat</item>
+        <item>Meat</item>
+        <item>Vegetable</item>
+        <item>Vegetable</item>
+        <item>Vegetable</item>
+    </string-array>
+
+    <integer-array name="Amount">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
+
+    <string-array name="Unit">
+        <item>Individual</item>
+        <item>Individual</item>
+        <item>Pound</item>
+        <item>Pound</item>
+        <item>Pound</item>
+        <item>Pound</item>
+        <item>Pound</item>
+        <item>Pound</item>
+        <item>Pound</item>
+        <item>Pound</item>
+    </string-array>
+
+    <string-array name="storage">
+        <item>Room</item>
+        <item>Room</item>
+        <item>Room</item>
+        <item>Frozen</item>
+        <item>Frozen</item>
+        <item>Frozen</item>
+        <item>Frozen</item>
+        <item>Fridge</item>
+        <item>Fridge</item>
+        <item>Fridge</item>
+    </string-array>
+
+
+</resources>
