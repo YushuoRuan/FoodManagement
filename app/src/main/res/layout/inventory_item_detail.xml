@@ -11,28 +11,28 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="13dp"
         app:srcCompat="@drawable/ic_meat" />
 
     <TextView
         android:id="@+id/nameTV"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="15dp"
         android:text="Name"
         android:textSize="24sp" />
 
     <TextView
         android:id="@+id/descriptionTV"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="71dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="58dp"
         android:text="Description" />
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="35dp"
         android:text="Amount" />
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="71dp"
+        android:layout_marginTop="58dp"
         android:layout_marginEnd="35dp"
         android:text="Storage"
         android:textSize="14sp" />

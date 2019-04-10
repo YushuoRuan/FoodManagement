@@ -13,12 +13,12 @@ public class ItemAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
     String[] names;
-    Integer[] amounts;
+    int[] amounts;
     String[] units;
     String[] descriptions;
     String[] storages;
 
-    public ItemAdapter(Context c, String[] n, Integer[] a, String[] d, String[] s, String[] u){
+    public ItemAdapter(Context c, String[] n, int[] a, String[] u, String[] d, String[] s){
         names = n;
         amounts = a;
         descriptions = d;
