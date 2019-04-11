@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -70,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent showFoodEdit = new Intent(getApplicationContext(), FoodEdit.class);
                 showFoodEdit.putExtra("com.example.foodmanagement.ITEM_INDEX", position);
                 startActivity(showFoodEdit);
+            }
+        });
+
+        Button addinBtn = (Button) findViewById(R.id.addInventoryBtn);
+
+        addinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent showAddInventory = new Intent(getApplicationContext(), addInventoryActivity.class);
+                startActivity(showAddInventory);
             }
         });
 
