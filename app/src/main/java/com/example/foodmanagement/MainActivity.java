@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
@@ -24,25 +26,26 @@ public class MainActivity extends AppCompatActivity {
     String[] descriptions;
     String[] storages;
 
-//    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-//            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-//
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            switch (item.getItemId()) {
-//                case R.id.navigation_inventory:
-//                    mTextMessage.setText(R.string.title_inventory);
-//                    return true;
-//                case R.id.navigation_cart:
-//                    mTextMessage.setText(R.string.title_shopping_cart);
-//                    return true;
-//                case R.id.navigation_recipe:
-//                    mTextMessage.setText(R.string.title_recipe);
-//                    return true;
-//            }
-//            return false;
-//        }
-//    };
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_inventory:
+                    return true;
+                case R.id.navigation_cart:
+                    Intent showShoppingList = new Intent(getApplicationContext(), ShoppingListActivity.class);
+                    startActivity(showShoppingList);
+                    return true;
+                case R.id.navigation_recipe:
+                    Intent showRecipe = new Intent(getApplicationContext(), RecipeActivity.class);
+                    startActivity(showRecipe);
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-//        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         Resources res = getResources();
         myListView = (ListView) findViewById(R.id.invenListView);
@@ -86,5 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }

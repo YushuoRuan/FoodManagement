@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content" />
 
             <Spinner
-                android:id="@+id/foodTypeSpinner"
+                android:id="@+id/shopTypeSpinner"
                 android:layout_width="143dp"
                 android:layout_height="40dp" />
 
@@ -73,7 +73,7 @@
                 android:layout_height="11dp" />
 
             <EditText
-                android:id="@+id/addNameET"
+                android:id="@+id/shopNameET"
                 android:layout_width="206dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -113,7 +113,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/addAmountET"
+                    android:id="@+id/ShopAmountET"
                     android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -135,7 +135,7 @@
                     android:textSize="18sp" />
 
                 <Spinner
-                    android:id="@+id/addUnitSpinner"
+                    android:id="@+id/ShopUnitSpinner"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_weight="1" />
@@ -168,7 +168,7 @@
                 android:layout_height="10dp" />
 
             <Spinner
-                android:id="@+id/addStorageSpinner"
+                android:id="@+id/shopStorageSpinner"
                 android:layout_width="143dp"
                 android:layout_height="40dp" />
 
@@ -203,7 +203,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/addTagET"
+                    android:id="@+id/shopTagET"
                     android:layout_width="141dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -212,7 +212,7 @@
                     android:inputType="textPersonName" />
 
                 <Button
-                    android:id="@+id/addTagBtn"
+                    android:id="@+id/shopTagBtn"
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -225,7 +225,7 @@
             </LinearLayout>
 
             <Spinner
-                android:id="@+id/addTagSpinner"
+                android:id="@+id/shopTagSpinner"
                 android:layout_width="209dp"
                 android:layout_height="wrap_content" />
 
