@@ -47,6 +47,29 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private BottomNavigationView.OnNavigationItemSelectedListener tOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_all:
+                    //display all inventory
+                    return true;
+                case R.id.navigation_fridge:
+                    //display fridge inventory
+                    return true;
+                case R.id.navigation_frozen:
+                    //display frozen inventory
+                    return true;
+                case R.id.navigation_room:
+                    //display room temperature inventory
+                    return true;
+            }
+            return false;
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         myListView = (ListView) findViewById(R.id.invenListView);
         names = res.getStringArray(R.array.Names);
         amounts = res.getIntArray(R.array.Amount);
-        units = res.getStringArray(R.array.Units);;
+        units = res.getStringArray(R.array.Units);
         descriptions = res.getStringArray(R.array.Dates);
         storages = res.getStringArray(R.array.Storages);
 
