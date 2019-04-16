@@ -231,7 +231,14 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="57dp" />
+                android:layout_height="34dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Expire Date"
+                android:textSize="24sp" />
 
             <CalendarView
                 android:id="@+id/calendarView3"
