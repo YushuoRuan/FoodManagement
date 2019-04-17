@@ -241,7 +241,7 @@
                 android:textSize="24sp" />
 
             <CalendarView
-                android:id="@+id/calendarView3"
+                android:id="@+id/expireCV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -249,7 +249,7 @@
                 android:id="@+id/finalAddInventoryBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add to Inventory" />
+                android:text="Button" />
 
         </LinearLayout>
     </ScrollView>

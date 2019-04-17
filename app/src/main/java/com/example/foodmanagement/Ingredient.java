@@ -5,24 +5,21 @@ import java.util.Date;
 
 public class Ingredient {
 
+    private String type;
     private String material;
     private double amount;
     private String unit;
-    private Date addDate;
     private Date expiredDate;
     private ArrayList<String> tags = new ArrayList<>();
 
     //init
-    public Ingredient(String m, double a, String u){
+    public Ingredient(String t, String m, double a, String u){
         material = m;
         amount = a;
         unit = u;
     }
 
     //setters
-    public void setAddDate(Date d){
-        this.addDate = d;
-    }
 
     public void setExpiredDate(Date d) {
         this.expiredDate = d;
@@ -37,9 +34,6 @@ public class Ingredient {
     }
 
     //getters
-    public Date getAddDate() {
-        return this.addDate;
-    }
 
     public Date getExpiredDate() {
         return this.expiredDate;

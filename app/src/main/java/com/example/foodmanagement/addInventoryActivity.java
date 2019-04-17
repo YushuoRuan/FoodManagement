@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class addInventoryActivity extends AppCompatActivity {
     EditText addNameET;
     EditText addAmountET;
     EditText addTagET;
+
+    CalendarView expireCalender;
 
 
     @Override
@@ -65,6 +68,8 @@ public class addInventoryActivity extends AppCompatActivity {
         addAmountET = (EditText) findViewById(R.id.addAmountET);
         addTagET = (EditText) findViewById(R.id.addTagET);
 
+        expireCalender = (CalendarView) findViewById(R.id.expireCV);
+
         Button finalAdd = (Button) findViewById(R.id.finalAddInventoryBtn);
         finalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +92,7 @@ public class addInventoryActivity extends AppCompatActivity {
         String amount = addAmountET.getText().toString();
         String unit = unitSpinner.getSelectedItem().toString();
         String storage = storeSpinner.getSelectedItem().toString();
+
 
         if(type==""|| name==""||amount==""||unit==""||storage==""){
             Toast.makeText(addInventoryActivity.this, "More Info Required", Toast.LENGTH_LONG).show();

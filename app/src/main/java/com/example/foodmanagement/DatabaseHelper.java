@@ -2,6 +2,7 @@ package com.example.foodmanagement;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -46,5 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             return true;
 
+    }
+    public Cursor getInventoryData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+INVENTORY_TABLE_NAME, null);
+        return res;
     }
 }

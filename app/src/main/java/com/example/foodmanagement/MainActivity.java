@@ -92,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         storages = res.getStringArray(R.array.Storages);
 
 
+
+
         ItemAdapter itemAdapter = new ItemAdapter(this, names, amounts, units, descriptions, storages);
         myListView.setAdapter(itemAdapter);
 

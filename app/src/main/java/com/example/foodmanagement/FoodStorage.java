@@ -1,3 +1,5 @@
+package com.example.foodmanagement;
+
 import com.example.foodmanagement.Ingredient;
 
 import java.util.ArrayList;
@@ -13,11 +15,9 @@ public class FoodStorage {
 
     }
 
-    public void addIngredient(String name, double amount, String unit, Date add, Date exp, String[] tags){
-        Ingredient newIngredient = new Ingredient(name, amount, unit);
-        if (add!=null){
-            newIngredient.setAddDate(add);
-        }
+    public void addIngredient(String type, String name, double amount, String unit, Date exp, String[] tags){
+        Ingredient newIngredient = new Ingredient(type, name, amount, unit);
+
         if (exp!=null){
             newIngredient.setExpiredDate(exp);
         }
