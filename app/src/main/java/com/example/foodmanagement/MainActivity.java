@@ -2,6 +2,7 @@ package com.example.foodmanagement;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -26,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     String[] descriptions;
     String[] storages;
 
-    DatabaseHelper myDb;
+    ArrayList<Ingredient> ingredients;
+
+
+    public DatabaseHelper myDb;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -78,37 +82,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myDb = new DatabaseHelper(this);
+        FoodStorage foodStorage = new FoodStorage(myDb);
 
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        Resources res = getResources();
+//        Resources res = getResources();
+//        names = res.getStringArray(R.array.Names);
+//        amounts = res.getIntArray(R.array.Amount);
+//        units = res.getStringArray(R.array.Units);
+//        descriptions = res.getStringArray(R.array.Dates);
+//        storages = res.getStringArray(R.array.Storages);
+
+        ingredients = foodStorage.getIngredients();
+
         myListView = (ListView) findViewById(R.id.invenListView);
-        names = res.getStringArray(R.array.Names);
-        amounts = res.getIntArray(R.array.Amount);
-        units = res.getStringArray(R.array.Units);
-        descriptions = res.getStringArray(R.array.Dates);
-        storages = res.getStringArray(R.array.Storages);
-
-
-
-
-        ItemAdapter itemAdapter = new ItemAdapter(this, names, amounts, units, descriptions, storages);
-        myListView.setAdapter(itemAdapter);
-
+        if(foodStorage.getIngredients().size()>0) {
+            ItemAdapter itemAdapter = new ItemAdapter(this, ingredients);
+            myListView.setAdapter(itemAdapter);
+        }
+//
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent showFoodEdit = new Intent(getApplicationContext(), FoodEdit.class);
-                showFoodEdit.putExtra("com.example.foodmanagement.ITEM_INDEX", position);
+                showFoodEdit.putExtra("position", position);
+                showFoodEdit.putExtra("ID", ingredients.get(position).ID);
                 startActivity(showFoodEdit);
             }
         });
 
-        Button addinBtn = (Button) findViewById(R.id.addInventoryBtn);
+        Button addInBtn = (Button) findViewById(R.id.addInventoryBtn);
 
-        addinBtn.setOnClickListener(new View.OnClickListener() {
+        addInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent showAddInventory = new Intent(getApplicationContext(), addInventoryActivity.class);

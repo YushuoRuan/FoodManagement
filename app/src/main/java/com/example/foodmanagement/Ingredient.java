@@ -5,23 +5,28 @@ import java.util.Date;
 
 public class Ingredient {
 
+    public Integer ID;
     private String type;
     private String material;
     private double amount;
     private String unit;
-    private Date expiredDate;
+    private String storage;
+    private String expiredDate;
     private ArrayList<String> tags = new ArrayList<>();
 
     //init
-    public Ingredient(String t, String m, double a, String u){
+    public Ingredient(Integer I, String t, String m, double a, String u, String s){
+        ID=I;
+        type = t;
         material = m;
         amount = a;
         unit = u;
+        storage = s;
     }
 
     //setters
 
-    public void setExpiredDate(Date d) {
+    public void setExpiredDate(String d) {
         this.expiredDate = d;
     }
 
@@ -35,7 +40,7 @@ public class Ingredient {
 
     //getters
 
-    public Date getExpiredDate() {
+    public String getExpiredDate() {
         return this.expiredDate;
     }
 
@@ -55,4 +60,11 @@ public class Ingredient {
         return this.tags;
     }
 
+    public String getStorage() {
+        return storage;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Date;
+
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "FoodManagement.db";
     public static final String INVENTORY_TABLE_NAME = "inventory_table";
@@ -15,6 +18,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_4 = "Amount";
     public static final String COL_5 = "Unit";
     public static final String COL_6 = "Storage";
+    public static final String COL_7 = "Expire";
+    public static final String COL_8 = "Tags";
 
 
     public DatabaseHelper(Context context) {
@@ -24,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + INVENTORY_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Type Text, Name Text, Amount INTEGER, Unit TEXT, Storage TEXT)");
+        db.execSQL("create table " + INVENTORY_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Type Text, Name Text, Amount REAL, Unit TEXT, Storage TEXT, Expire TEXT, Tags TEXT)");
     }
 
     @Override
@@ -33,14 +38,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertDataInventory(String type, String name, String amount, String unit, String storage){
+    public boolean insertDataInventory(String t, String n, String a, String u, String s, String e, String tags){
         SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, type);
-        contentValues.put(COL_3, name);
-        contentValues.put(COL_4, amount);
-        contentValues.put(COL_5, unit);
-        contentValues.put(COL_6, storage);
+        contentValues.put(COL_2, t);
+        contentValues.put(COL_3, n);
+        contentValues.put(COL_4, a);
+        contentValues.put(COL_5, u);
+        contentValues.put(COL_6, s);
+        contentValues.put(COL_7, e);
+        contentValues.put(COL_8, tags);
+
         long result = db.insert(INVENTORY_TABLE_NAME, null, contentValues);
         if(result == -1)
             return false;
@@ -51,6 +60,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getInventoryData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+INVENTORY_TABLE_NAME, null);
+        return res;
+    }
+
+    public Cursor getIngredient(Integer id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+INVENTORY_TABLE_NAME + " where ID = " + Integer.toString(id), null);
+        res.moveToNext();
         return res;
     }
 }

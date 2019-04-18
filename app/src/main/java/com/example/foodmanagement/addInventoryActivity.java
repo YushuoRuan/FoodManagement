@@ -1,5 +1,6 @@
 package com.example.foodmanagement;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.support.annotation.ArrayRes;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-import java.lang.reflect.Array;
+import java.util.Date;
 
 public class addInventoryActivity extends AppCompatActivity {
 
@@ -33,6 +34,9 @@ public class addInventoryActivity extends AppCompatActivity {
     EditText addTagET;
 
     CalendarView expireCalender;
+    Date expireDate;
+
+    String[] tags;
 
 
     @Override
@@ -67,16 +71,27 @@ public class addInventoryActivity extends AppCompatActivity {
         addNameET = (EditText) findViewById(R.id.addNameET);
         addAmountET = (EditText) findViewById(R.id.addAmountET);
         addTagET = (EditText) findViewById(R.id.addTagET);
-
         expireCalender = (CalendarView) findViewById(R.id.expireCV);
+
+        //expireDate = new Date(expireCalender.getDate());
+        expireDate = null;
+
+        expireCalender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                expireDate = new Date(year-1900, month, dayOfMonth);
+            }
+        });
 
         Button finalAdd = (Button) findViewById(R.id.finalAddInventoryBtn);
         finalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 boolean added = addToInventory();
                 if(added){
                     finish();
+                    Intent showInventory = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(showInventory);
                 }
             }
         });
@@ -98,7 +113,10 @@ public class addInventoryActivity extends AppCompatActivity {
             Toast.makeText(addInventoryActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
             return false;
         }
-        boolean inserted = myDb.insertDataInventory(type, name, amount, unit, storage);
+        String date2 = "null";
+        if(expireDate!=null)
+            date2 = (expireDate.getMonth()+1)+"/"+expireDate.getDate()+"/"+(expireDate.getYear()+1900);
+        boolean inserted = myDb.insertDataInventory(type, name, amount, unit, storage, date2, "none");
         if(inserted){
             Toast.makeText(addInventoryActivity.this, "Added to inventory", Toast.LENGTH_LONG).show();
             return true;

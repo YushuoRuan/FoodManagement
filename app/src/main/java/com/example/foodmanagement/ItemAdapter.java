@@ -9,21 +9,31 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ItemAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
-    String[] names;
-    int[] amounts;
-    String[] units;
-    String[] descriptions;
-    String[] storages;
 
-    public ItemAdapter(Context c, String[] n, int[] a, String[] u, String[] d, String[] s){
-        names = n;
-        amounts = a;
-        descriptions = d;
-        storages = s;
-        units = u;
+    String[] names;
+    String[] amounts;
+    String[] expires;
+    String[] storages;
+    String[] units;
+
+    public ItemAdapter(Context c, ArrayList<Ingredient> ingredients){
+        names = new String[ingredients.size()];
+        amounts = new String[ingredients.size()];
+        expires = new String[ingredients.size()];
+        storages = new String[ingredients.size()];
+        units = new String[ingredients.size()];
+        for(int i = 0; i<ingredients.size(); i++){
+            names[i] = ingredients.get(i).getMaterial();
+            amounts[i] = Double.toString(ingredients.get(i).getAmount());
+            expires[i] = ingredients.get(i).getExpiredDate();
+            storages[i] = ingredients.get(i).getStorage();
+            units[i] = ingredients.get(i).getUnit();
+        }
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -39,6 +49,7 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
+        //return ingredients.get(position).ID;
         return position;
     }
 
@@ -53,14 +64,14 @@ public class ItemAdapter extends BaseAdapter {
 
 
         String name = names[position];
-        String amount = Integer.toString(amounts[position]);
-        String desc = descriptions[position];
+        String amount =amounts[position];
+        String expire = expires[position];
         String storage = storages[position];
         String unit = units[position];
 
         nameTextView.setText(name);
         amountTextView.setText(amount + " " + unit);
-        descriptionTextView.setText(desc);
+        descriptionTextView.setText(expire);
         storageTextView.setText(storage);
 
         return v;
