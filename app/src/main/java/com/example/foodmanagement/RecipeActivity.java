@@ -6,6 +6,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -38,5 +40,23 @@ public class RecipeActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setSelectedItemId(R.id.navigation_recipe);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        Button newRecipeBtn = (Button) findViewById(R.id.newRecipeBtn);
+        newRecipeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newRecipeActivity = new Intent(getApplicationContext(), NewRecipe.class);
+                startActivity(newRecipeActivity);
+            }
+        });
+
+        Button historyRecipeBtn = (Button) findViewById(R.id.historyRecipeBtn);
+        historyRecipeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent historyRecipeActivity = new Intent(getApplicationContext(), HistoryRecipe.class);
+                startActivity(historyRecipeActivity);
+            }
+        });
     }
 }
