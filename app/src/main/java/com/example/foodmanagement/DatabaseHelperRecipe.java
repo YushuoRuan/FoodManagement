@@ -42,17 +42,17 @@ public class DatabaseHelperRecipe extends SQLiteOpenHelper {
     //insert one ingredient to shopping table
     //return false: unsuccessful
     //return true: successful
-    public boolean insertDataShopping(String t, String n, String a, String u, String s, String e, String tags){
+    public boolean insertRecipe(String curr, String n, String t, String cuis, String ingreds, String amounts, String units){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, t);
+        contentValues.put(COL_2, curr);
         contentValues.put(COL_3, n);
-        contentValues.put(COL_4, a);
-        contentValues.put(COL_5, u);
-        contentValues.put(COL_6, s);
-        contentValues.put(COL_7, e);
-        contentValues.put(COL_8, tags);
+        contentValues.put(COL_4, t);
+        contentValues.put(COL_5, cuis);
+        contentValues.put(COL_6, ingreds);
+        contentValues.put(COL_7, amounts);
+        contentValues.put(COL_8, units);
 
         long result = db.insert(RECIPE_TABLE_NAME, null, contentValues);
         if(result == -1)
@@ -63,13 +63,13 @@ public class DatabaseHelperRecipe extends SQLiteOpenHelper {
     }
     //get all data in shopping table
     //return multiple lines dataframe
-    public Cursor getShoppingData() {
+    public Cursor getRecipeData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+RECIPE_TABLE_NAME, null);
         return res;
     }
 
-    //get one ingredient from shopping table
+    //get one recipe from shopping table
     //return one line dataframe
     public Cursor getShoppingIngredient(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -77,12 +77,13 @@ public class DatabaseHelperRecipe extends SQLiteOpenHelper {
         res.moveToNext();
         return res;
     }
-    //delete one ingredient from shopping table
+    //delete one recipe from Recipe table
     //return 0: unsuccessful
     //return 1: successful
-    public Integer deleteShoppingData (Integer id){
+    public Boolean toHistoryRecipe (Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(RECIPE_TABLE_NAME, "ID = ?", new String[] {Integer.toString(id)});
+        db.execSQL("update "+RECIPE_TABLE_NAME+" set Current = 1 where ID = " + Integer.toString(id));
+        return true;
     }
 
 
