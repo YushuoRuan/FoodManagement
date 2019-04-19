@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ItemAdapter extends BaseAdapter {
@@ -69,8 +70,9 @@ public class ItemAdapter extends BaseAdapter {
         String storage = storages[position];
         String unit = units[position];
 
+        DecimalFormat df = new DecimalFormat("#.##");
         nameTextView.setText(name);
-        amountTextView.setText(amount + " " + unit);
+        amountTextView.setText(df.format(Double.parseDouble(amount)) + " " + unit);
         descriptionTextView.setText(expire);
         storageTextView.setText(storage);
 

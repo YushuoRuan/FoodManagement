@@ -8,13 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import static com.example.foodmanagement.DatabaseHelper.INVENTORY_TABLE_NAME;
 
 public class FoodEdit extends AppCompatActivity {
+
+    DatabaseHelper tmpDB;
+    EditText subtractAmountET;
+    int ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +29,10 @@ public class FoodEdit extends AppCompatActivity {
 
         Intent in = getIntent();
         int index = in.getIntExtra("position", -1);
-        int ID = in.getIntExtra("ID", -1);
+        ID = in.getIntExtra("ID", -1);
 
 
-        DatabaseHelper tmpDB = new DatabaseHelper(this);
+        tmpDB = new DatabaseHelper(this);
         Cursor res = tmpDB.getIngredient(ID);
 
 //        Resources res = getResources();
@@ -38,6 +44,9 @@ public class FoodEdit extends AppCompatActivity {
         String unit = res.getString(4);
         String storage = res.getString(5);
 
+        TextView idTV = (TextView) findViewById(R.id.editIDTV);
+        idTV.setText(Integer.toString(ID));
+
         TextView nameTV = (TextView) findViewById(R.id.editNameTV);
         nameTV.setText(name);
 
@@ -47,6 +56,8 @@ public class FoodEdit extends AppCompatActivity {
         TextView storageTV = (TextView) findViewById(R.id.editStorageTV);
         storageTV.setText(storage);
 
+        subtractAmountET = (EditText) findViewById(R.id.subtractAmountET);
+
         Button subtractBtn = (Button) findViewById(R.id.subtractButton);
         Button deleteBtn = (Button) findViewById(R.id.deleteButton);
 
@@ -54,13 +65,33 @@ public class FoodEdit extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //subtract amount from the database
+                Double outAmount = Double.parseDouble(subtractAmountET.getText().toString());
+                boolean subtracted = tmpDB.subtractDataInventory(ID, outAmount);
+                if(subtracted){
+                    Toast.makeText(FoodEdit.this, "Subtracted from Inventory", Toast.LENGTH_LONG).show();
+                    finish();
+                    Intent showInventory = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(showInventory);
+                }
+                else{
+                    Toast.makeText(FoodEdit.this, "Failed: insufficient amount", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //delete item from the database
+                Integer deleted = tmpDB.deleteInventoryData(ID);
+                if(deleted>0){
+                    Toast.makeText(FoodEdit.this, "Deleted from Inventory", Toast.LENGTH_LONG).show();
+                    finish();
+                    Intent showInventory = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(showInventory);
+                }
+                else{
+                    Toast.makeText(FoodEdit.this, "Failed: item not found", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
