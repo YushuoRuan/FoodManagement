@@ -80,20 +80,31 @@ public class RecipeActivity extends AppCompatActivity {
 
         recipeDB = new DatabaseHelperRecipe(this);
         Cursor res = recipeDB.getAllRecipeData();
-        ArrayList<Recipe> recipes;
-        while(res.moveToNext())
-        {
-            String ID = res.getString(0);
-            String Name = res.getString(1);
-            String Cuisine = res.getString(2)
+        if(res.getCount()>0){
+            ArrayList<Recipe> recipes = new ArrayList<>();
+            while(res.moveToNext())
+            {
+                Integer id = res.getInt(0);
+                String name = res.getString(1);
+                String cuisine = res.getString(2);
+                String type = res.getString(3);
+                String[] ingredients = res.getString(4).split(",");
+                String[] amountsS = res.getString(5).split(",");
+                String[] units = res.getString(6).split(",");
+                Double []amounts = new Double[amountsS.length];
+                for(int i = 0; i<amountsS.length; i++)
+                {
+                    amounts[i] = Double.parseDouble(amountsS[i]);
+                }
 
+                Recipe newRecipe = new Recipe(id, name, cuisine, type, ingredients,amounts,units);
+                recipes.add(newRecipe);
+            }
+
+            recipeListView = (ListView) findViewById(R.id.recipeLV);
+            RecipeItemAdapter recipeItemAdapter = new RecipeItemAdapter(this, recipes);
+            recipeListView.setAdapter(recipeItemAdapter);
         }
-
-        recipeListView = (ListView) findViewById(R.id.recipeLV);
-
-
-        RecipeItemAdapter recipeItemAdapter = new RecipeItemAdapter(this, names, amounts, units);
-
 
 
 

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Recipe {
 
-    Integer ID;
-    String name;
-    String type;
-    String cuisine;
-    String[] ingredients;
-    Double[] amounts;
-    String[] units;
+    private Integer ID;
+    private String name;
+    private String type;
+    private String cuisine;
+    private String[] ingredients;
+    private Double[] amounts;
+    private String[] units;
 
     public Recipe(Integer id, String n, String t, String c, String[] i, Double[] a, String[] u){
         ID = id;
@@ -22,4 +22,31 @@ public class Recipe {
         units = u;
     }
 
+    public Integer getID() {
+        return ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getCuisine() {
+        return cuisine;
+    }
+
+    public String[] getIngredients() {
+        return ingredients;
+    }
+
+    public Double[] getAmounts() {
+        return amounts;
+    }
+
+    public String[] getUnits() {
+        return units;
+    }
 }

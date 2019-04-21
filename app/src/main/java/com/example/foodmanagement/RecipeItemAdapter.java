@@ -39,7 +39,7 @@ public class RecipeItemAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         //return ingredients.get(position).ID;
-        return recipes.get(position).ID;
+        return recipes.get(position).getID();
     }
 
     @Override
@@ -51,9 +51,9 @@ public class RecipeItemAdapter extends BaseAdapter {
         TextView availableTV = (TextView) v.findViewById(R.id.availableTV);
 
 
-        nameTextView.setText(recipes.get(position).name);
-        cuisineTextView.setText(recipes.get(position).cuisine);
-        typeTextView.setText(recipes.get(position).type);
+        nameTextView.setText(recipes.get(position).getName());
+        cuisineTextView.setText(recipes.get(position).getCuisine());
+        typeTextView.setText(recipes.get(position).getType());
         availableTV.setText(getIngredientFraction(position));
 
         return v;
@@ -61,7 +61,7 @@ public class RecipeItemAdapter extends BaseAdapter {
 
     private String getIngredientFraction(int position){
 
-        String[] ingredients = recipes.get(position).ingredients;
+        String[] ingredients = recipes.get(position).getIngredients();
         return "0/"+ingredients.length;
     }
 }

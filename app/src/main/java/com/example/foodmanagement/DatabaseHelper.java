@@ -13,14 +13,25 @@ import java.util.Date;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "FoodManagement.db";
     public static final String INVENTORY_TABLE_NAME = "inventory_table";
+    public static final String COLI_1 = "ID";
+    public static final String COLI_2 = "Type";
+    public static final String COLI_3 = "Name";
+    public static final String COLI_4 = "Amount";
+    public static final String COLI_5 = "Unit";
+    public static final String COLI_6 = "Storage";
+    public static final String COLI_7 = "Expire";
+    public static final String COLI_8 = "Tags";
+
+    //public static final String DATABASE_NAME = "FoodManagement.db";
+    public static final String RECIPE_TABLE_NAME = "recipe_table";
     public static final String COL_1 = "ID";
-    public static final String COL_2 = "Type";
+    public static final String COL_2 = "Current"; //1:current 0:history
     public static final String COL_3 = "Name";
-    public static final String COL_4 = "Amount";
-    public static final String COL_5 = "Unit";
-    public static final String COL_6 = "Storage";
-    public static final String COL_7 = "Expire";
-    public static final String COL_8 = "Tags";
+    public static final String COL_4 = "Type"; //main dish, appetizer
+    public static final String COL_5 = "Cuisine"; //asian, american
+    public static final String COL_6 = "Ingredients";//"tomato,egg,ketchup"
+    public static final String COL_7 = "Amounts";//"1, 2, 0.3"
+    public static final String COL_8 = "Units";//"individual, individual, oz"
 
 
     public DatabaseHelper(Context context) {
@@ -43,13 +54,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, t);
-        contentValues.put(COL_3, n);
-        contentValues.put(COL_4, a);
-        contentValues.put(COL_5, u);
-        contentValues.put(COL_6, s);
-        contentValues.put(COL_7, e);
-        contentValues.put(COL_8, tags);
+        contentValues.put(COLI_2, t);
+        contentValues.put(COLI_3, n);
+        contentValues.put(COLI_4, a);
+        contentValues.put(COLI_5, u);
+        contentValues.put(COLI_6, s);
+        contentValues.put(COLI_7, e);
+        contentValues.put(COLI_8, tags);
 
         long result = db.insert(INVENTORY_TABLE_NAME, null, contentValues);
         if(result == -1)
@@ -87,6 +98,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Integer deleteInventoryData (Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(INVENTORY_TABLE_NAME, "ID = ?", new String[] {Integer.toString(id)});
+    }
+
+    public Cursor getShoppingData() {
+        return null;
     }
 
 
