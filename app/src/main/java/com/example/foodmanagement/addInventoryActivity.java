@@ -62,6 +62,9 @@ public class addInventoryActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         storeSpinner.setAdapter(adapter3);
 
+        String[] a;
+
+
         tagSpinner = (Spinner) findViewById(R.id.addTagSpinner);
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this, R.array.Tags, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -97,7 +100,12 @@ public class addInventoryActivity extends AppCompatActivity {
         });
 
 
+        tagSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
 
     }
 
@@ -107,6 +115,7 @@ public class addInventoryActivity extends AppCompatActivity {
         String amount = addAmountET.getText().toString();
         String unit = unitSpinner.getSelectedItem().toString();
         String storage = storeSpinner.getSelectedItem().toString();
+
 
 
         if(type==""|| name==""||amount==""||unit==""||storage==""){

@@ -61,17 +61,17 @@ public class DatabaseHelperRecipe extends SQLiteOpenHelper {
             return true;
 
     }
-    //get all data in shopping table
+    //get all data in Recipe table
     //return multiple lines dataframe
-    public Cursor getRecipeData() {
+    public Cursor getAllRecipeData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+RECIPE_TABLE_NAME, null);
         return res;
     }
 
-    //get one recipe from shopping table
+    //get one recipe from recipe table
     //return one line dataframe
-    public Cursor getShoppingIngredient(Integer id) {
+    public Cursor getRecipe(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+RECIPE_TABLE_NAME + " where ID = " + Integer.toString(id), null);
         res.moveToNext();

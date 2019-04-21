@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShopItemAdapter extends BaseAdapter {
 
@@ -39,13 +40,13 @@ public class ShopItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = shopInflater.inflate(R.layout.shopping_item_detail, null);
 
-        TextView nameTV = (TextView) v.findViewById(R.id.shopDetailNameTV);
-        TextView amountTV = (TextView) v.findViewById(R.id.shopDetailAmountTV);
+        final TextView nameTV = (TextView) v.findViewById(R.id.shopDetailNameTV);
+        final TextView amountTV = (TextView) v.findViewById(R.id.shopDetailAmountTV);
         TextView unitTV = (TextView) v.findViewById(R.id.shopDetailUnitTV);
-        //Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
+        Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
 
         //ImageView checkImg = (ImageView) v.findViewById(R.id.checkImageView);
 
@@ -54,6 +55,12 @@ public class ShopItemAdapter extends BaseAdapter {
         amountTV.setText(Integer.toString(amounts[position]));
         unitTV.setText(units[position]);
 
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Delete item from shopping list table
+            }
+        });
 //        deleteBtn.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
