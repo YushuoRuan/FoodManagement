@@ -130,5 +130,27 @@
 
     </string-array>
 
+    <string-array name="recipeType">
+        <item>Appetizer</item>
+        <item>Entree</item>
+        <item>Dessert</item>
+        <item>Drink</item>
+        <item>Other</item>
+
+    </string-array>
+
+    <string-array name="recipeCuisine">
+        <item>Chinese</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Thai</item>
+        <item>Indian</item>
+        <item>Mexican</item>
+        <item>American</item>
+        <item>French</item>
+        <item>Italian</item>
+
+    </string-array>
+
 
 </resources>
