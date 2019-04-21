@@ -1,3 +1,11 @@
+package com.example.foodmanagement;
+import android.database.Cursor;
+
+import com.example.foodmanagement.DatabaseHelper;
+import com.example.foodmanagement.Ingredient;
+
+import java.util.ArrayList;
+
 public class ShoppingCart {
     private ArrayList<Ingredient> shoppingList;
 

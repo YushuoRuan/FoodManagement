@@ -12,62 +12,60 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
-import android.util.Log
+import android.util.Log;
 
 
 public class ShopItemAdapter extends BaseAdapter {
 
     LayoutInflater shopInflater;
-    String[] names;
-    int[] amounts;
-    String[] units;
+    ArrayList<Ingredient> ingredients;
 
 
-    private static HashMap<Integer,Boolean> checked=null;
-    public HashMap<Integer, Boolean> getCheckeds() {
-        return checkeds;
-    }
+//    private static HashMap<Integer,Boolean> checked=null;
+//    public HashMap<Integer, Boolean> getCheckeds() {
+//        return checkeds;
+//    }
+//
+//
+//    public void setCheckeds(HashMap<Integer, Boolean> checkeds) {
+//        ShopItemAdapter.checkeds = checkeds;
+//    }
 
 
-    public void setCheckeds(HashMap<Integer, Boolean> checkeds) {
-        ShopItemAdapter.checkeds = checkeds;
-    }
+    public ShopItemAdapter(Context c, ArrayList<Ingredient> i){
 
-
-    public ShopItemAdapter(Context c, String[] n, int[] a, String[] u){
-        names = n;
-        amounts = a;
-        units = u;
         shopInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ingredients = i;
 
-
-        checkeds=new HashMap<Integer,Boolean>();
-        for (int i=0;i<names.size();i++){
-            getCheckeds().put(i, false);
-        }
+//        checkeds=new HashMap<Integer,Boolean>();
+//        for (int i=0;i<names.size();i++){
+//            getCheckeds().put(i, false);
+//        }
 
 
     }
 
     @Override
     public int getCount() {
-        return names.length;
+        return ingredients.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return names[position];
+        return ingredients.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return ingredients.get(position).ID;
     }
 
     @Override
    /* public View getView(int position, View convertView, ViewGroup parent) {*/
-    public View getView(int position, View v, ViewGroup parent) {
+    public View getView(int position, View view, ViewGroup parent) {
 
          View v = shopInflater.inflate(R.layout.shopping_item_detail, null);
 
@@ -77,9 +75,9 @@ public class ShopItemAdapter extends BaseAdapter {
         Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
 
 
-        nameTV.setText(names[position]);
-        amountTV.setText(Integer.toString(amounts[position]));
-        unitTV.setText(units[position]);
+        nameTV.setText(ingredients.get(position).getMaterial());
+        amountTV.setText(Double.toString(ingredients.get(position).getAmount()));
+        unitTV.setText(ingredients.get(position).getUnit());
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +85,17 @@ public class ShopItemAdapter extends BaseAdapter {
                 //Delete item from shopping list table
             }
         });
+
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //delete shopping item from shopping list and database
+
+                nameTV.setText("clicked!");
+            }
+        });
+
+
         return v;
     }
 }

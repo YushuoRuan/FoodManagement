@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 
 import android.widget.TextView;
-import android.util.Log
+import android.util.Log;
 
 import java.util.ArrayList;
 
