@@ -1,6 +1,7 @@
 package com.example.foodmanagement;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,15 +27,16 @@ public class ShopItemAdapter extends BaseAdapter {
 
     DatabaseHelper myDb;
 
-//    private static HashMap<Integer,Boolean> checked=null;
-//    public HashMap<Integer, Boolean> getCheckeds() {
-//        return checkeds;
-//    }
-//
-//
-//    public void setCheckeds(HashMap<Integer, Boolean> checkeds) {
-//        ShopItemAdapter.checkeds = checkeds;
-//    }
+    private static HashMap<Integer,Boolean> checked=null;
+
+    public HashMap<Integer, Boolean> getChecked() {
+        return checked;
+    }
+
+
+    public void setCheckeds(HashMap<Integer, Boolean> checkeds) {
+        ShopItemAdapter.checked= checkeds;
+    }
 
 
     public ShopItemAdapter(Context c, ArrayList<Ingredient> i){
@@ -44,10 +46,12 @@ public class ShopItemAdapter extends BaseAdapter {
 
         myDb = new DatabaseHelper(c);
 
-//        checkeds=new HashMap<Integer,Boolean>();
-//        for (int i=0;i<names.size();i++){
-//            getCheckeds().put(i, false);
-//        }
+
+
+        checked=new HashMap<Integer,Boolean>();
+        for (int j=0;j<i.size();j++){
+            getChecked().put(j, false);
+        }
 
 
     }
@@ -75,7 +79,7 @@ public class ShopItemAdapter extends BaseAdapter {
 
         final TextView nameTV = (TextView) v.findViewById(R.id.shopDetailNameTV);
         final TextView amountTV = (TextView) v.findViewById(R.id.shopDetailAmountTV);
-        TextView unitTV = (TextView) v.findViewById(R.id.shopDetailUnitTV);
+        final TextView unitTV = (TextView) v.findViewById(R.id.shopDetailUnitTV);
         final Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
 
 
@@ -95,40 +99,36 @@ public class ShopItemAdapter extends BaseAdapter {
         });
 
 
+        ViewHolder holder = null;
+
+        if(holder ==  null){
+            holder =new ViewHolder();
+//            if( v== null){
+//
+//                View v = shopInflater(R.layout.shopping_item_detail,null);
+//            }
+
+
+            holder.ckb= (CheckBox) v.findViewById(R.id.checkBox);
+            v.setTag(holder);
+        }else{
+            holder = (ViewHolder) v.getTag();
+        }
+
+        holder.ckb.setChecked(getChecked().get(position));
+
+
         return v;
     }
+    class ViewHolder{
+
+        public CheckBox ckb;
+    }
+
 }
 
 
 
-
-
-
-//         ViewHolder holder = null;
-
-//         if(holder ==  null){
-//             holder =new ViewHolder();
-//             if( v== null){
-
-//                  View v = shopInflater(R.layout.shopping_item_detail,null);
-//             }
-
-//             holder.nameTV = (TextView) v.findViewById(R.id.shopDetailNameTV);
-//             holder.amountTV = (TextView) v.findViewById(R.id.shopDetailAmountTV);
-//             holder.unitTV = (TextView) v.findViewById(R.id.shopDetailUnitTV);
-
-//             holder.ckb= (CheckBox) v.findViewById(R.id.checkBox);
-//             v.setText(holder);
-//         }else{
-//             holder = (ViewHolder) v.getText();
-//         }
-
-//         holder.nameTV.setText(names.get(position));
-//         holder.amountTV.setText(Integer.toString(amounts[position]));
-//         holder.unitTV.setText(units.get(position));
-
-//         holder.ckb.setChecked(getCheckeds().get(position));
-//         return v;
 
 
 //     }

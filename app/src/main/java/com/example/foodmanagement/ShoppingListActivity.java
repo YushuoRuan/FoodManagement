@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.util.Log;
 
+import android.widget.AdapterView;
 import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
@@ -86,11 +87,16 @@ public class ShoppingListActivity extends AppCompatActivity {
         unitTV = (TextView) findViewById(R.id.shopDetailUnitTV);
         myListView = (ListView) findViewById(R.id.shoppingListView);
 
+
+
+
+
         DBhelper = new DatabaseHelper(this);
         // Cursor res = DBhelper.getShoppingData();
         ShoppingCart shoppingCart = new ShoppingCart(DBhelper);
 
         ArrayList<Ingredient> shoppingIngredients = shoppingCart.getShoppingIngredients();
+
 
 
 
@@ -111,28 +117,42 @@ public class ShoppingListActivity extends AppCompatActivity {
 
 
         if(shoppingIngredients.size()>0) {
-            ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);
+            final ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);
             myListView.setAdapter(shopItemAdapter);
+
+            myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    ShopItemAdapter.ViewHolder holder = (ShopItemAdapter.ViewHolder) view.getTag();
+                    holder.ckb.toggle();
+                    shopItemAdapter.getChecked().put(position, holder.ckb.isChecked());
+                    shopItemAdapter.notifyDataSetChanged();
+                }
+            });
         }
-
-
-        // public void checkboxClick(ShopItemAdapter shopItemAdapter, int position){
-
-
-        //     String s = names.get(position);
-        //     Log.d("String","s");
-        //     if (shopItemAdapter.getCheckeds().get(position)==true) {
-        //         shopItemAdapter.getCheckeds().put(position, false);
-
-        //     }else{
-
-        //         shopItemAdapter.getCheckeds().put(position, true);
-        //     }
-        //     shopItemAdapter.notifyDataSetChanged();
-
-
-        // }
-
     }
+
+
+
+
+        /*public void checkboxClick(ShopItemAdapter ShopItemAdapter, int position){
+
+
+             String s = names.get(position);
+             Log.d("String","s");
+             if (ShopItemAdapter.getCheckeds().get(position)==true) {
+                 ShopItemAdapter.getCheckeds().put(position, false);
+
+             }else{
+
+                 ShopItemAdapter.getCheckeds().put(position, true);
+             }
+            ShopItemAdapter.notifyDataSetChanged();
+
+
+         }*/
+
+
 }
 
