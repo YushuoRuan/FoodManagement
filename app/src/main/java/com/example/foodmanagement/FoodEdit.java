@@ -8,11 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.foodmanagement.DatabaseHelper.INVENTORY_TABLE_NAME;
 
@@ -21,6 +23,7 @@ public class FoodEdit extends AppCompatActivity {
     DatabaseHelper tmpDB;
     EditText subtractAmountET;
     int ID;
+    Date expireDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class FoodEdit extends AppCompatActivity {
         Intent in = getIntent();
         int index = in.getIntExtra("position", -1);
         ID = in.getIntExtra("ID", -1);
+        long currExpire = in.getLongExtra("expireDate",0);
 
 
         tmpDB = new DatabaseHelper(this);
@@ -91,6 +95,34 @@ public class FoodEdit extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(FoodEdit.this, "Failed: item not found", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        CalendarView expireCV = (CalendarView) findViewById(R.id.editExpireCV);
+        expireCV.setDate(currExpire);
+        Button updateExpireBtn = (Button) findViewById(R.id.updateExpireBtn);
+
+        expireDate = null;
+        expireCV.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                expireDate = new Date(year-1900, month, dayOfMonth);
+            }
+        });
+
+        updateExpireBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean updated = tmpDB.updateExpireInventory(ID, expireDate);
+                if(updated){
+                    Toast.makeText(FoodEdit.this, "Updated Expire Date", Toast.LENGTH_LONG).show();
+                    finish();
+                    Intent showInventory = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(showInventory);
+                }
+                else{
+                    Toast.makeText(FoodEdit.this, "Fail, please choose date", Toast.LENGTH_LONG).show();
                 }
             }
         });

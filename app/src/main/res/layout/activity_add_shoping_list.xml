@@ -7,7 +7,7 @@
     tools:context=".addInventoryActivity">
 
     <ScrollView
-        android:layout_width="399dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +17,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:layout_width="380dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="vertical"
@@ -113,13 +113,13 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/ShopAmountET"
+                    android:id="@+id/shopAmountET"
                     android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Amount"
-                    android:inputType="textPersonName" />
+                    android:inputType="number|numberDecimal" />
 
                 <Space
                     android:layout_width="44dp"
@@ -135,7 +135,7 @@
                     android:textSize="18sp" />
 
                 <Spinner
-                    android:id="@+id/ShopUnitSpinner"
+                    android:id="@+id/shopUnitSpinner"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_weight="1" />
@@ -231,12 +231,13 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="57dp" />
+                android:layout_height="16dp" />
 
-            <CalendarView
-                android:id="@+id/calendarView3"
+            <Button
+                android:id="@+id/shopFinalAddBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="Add to Shopping List" />
 
         </LinearLayout>
     </ScrollView>

@@ -102,6 +102,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("update "+INVENTORY_TABLE_NAME+" set Amount = " + Double.toString(amount) + " where ID = " + Integer.toString(id));
         return true;
     }
+
+    public boolean updateExpireInventory(Integer id, Date expireDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        if(expireDate==null){
+            return false;
+        }
+        else{
+            String idS = Integer.toString(id);
+            String newDate = (expireDate.getMonth() + 1) + "/" + expireDate.getDate() + "/" + (expireDate.getYear() + 1900);
+            db.execSQL("update " + INVENTORY_TABLE_NAME + " set Expire = '" + newDate + "' where ID = " + idS);
+            return true;
+        }
+
+    }
+
     public Cursor getInventoryData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select * from "+INVENTORY_TABLE_NAME, null);
@@ -123,7 +138,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //shopping list database helper functions
 
-    public boolean insertDataShopping(String t, String n, String a, String u, String s, String e, String tags){
+    public boolean insertDataShopping(String t, String n, String a, String u, String s){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -132,8 +147,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COLS_4, a);
         contentValues.put(COLS_5, u);
         contentValues.put(COLS_6, s);
-        contentValues.put(COLS_7, e);
-        contentValues.put(COLS_8, tags);
+        contentValues.put(COLS_7, "null");
+        contentValues.put(COLS_8, "null");
 
         long result = db.insert(SHOPPING_TABLE_NAME, null, contentValues);
         if(result == -1)

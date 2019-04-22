@@ -10,8 +10,8 @@
         android:id="@+id/editNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
         android:text="Name"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,8 +21,8 @@
         android:id="@+id/imageView"
         android:layout_width="70dp"
         android:layout_height="73dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="56dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_frozen" />
@@ -31,8 +31,8 @@
         android:id="@+id/editStorageTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
         android:text="Storage"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_width="122dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="136dp"
         android:ems="10"
         android:hint="amount out"
         android:inputType="number|numberDecimal"
@@ -56,7 +56,7 @@
         android:id="@+id/subtractButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="132dp"
         android:layout_marginEnd="44dp"
         android:text="Subtract"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,19 +66,19 @@
         android:id="@+id/deleteButton"
         android:layout_width="352dp"
         android:layout_height="57dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="?attr/colorError"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/editUnitTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="152dp"
         android:text="unit"
         app:layout_constraintStart_toEndOf="@+id/subtractAmountET"
         app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +100,31 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="-1"
-        app:layout_constraintStart_toEndOf="@+id/currentRecipeText"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CalendarView
+        android:id="@+id/editExpireCV"
+        android:layout_width="326dp"
+        android:layout_height="304dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.531" />
+
+    <Button
+        android:id="@+id/updateExpireBtn"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Update Expire"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editExpireCV" />
+
 </android.support.constraint.ConstraintLayout>

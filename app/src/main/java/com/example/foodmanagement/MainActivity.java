@@ -14,21 +14,20 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
     ListView myListView;
-    String[] names;
-    int[] amounts;
-    String[] units;
-    String[] descriptions;
-    String[] storages;
 
     ArrayList<Ingredient> ingredients;
 
+    ArrayList<Ingredient> ingredientsTBD;
 
     public DatabaseHelper myDb;
 
@@ -60,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_all:
-                    //display all inventory
+                    ingredientsTBD = ingredients;
                     return true;
                 case R.id.navigation_fridge:
-                    //display fridge inventory
+                    ingredientsTBD = ingredients;
                     return true;
                 case R.id.navigation_frozen:
                     //display frozen inventory
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         ingredients = foodStorage.getIngredients();
 
         myListView = (ListView) findViewById(R.id.invenListView);
-        if(foodStorage.getIngredients().size()>0) {
+        if(ingredients.size()>0) {
             ItemAdapter itemAdapter = new ItemAdapter(this, ingredients);
             myListView.setAdapter(itemAdapter);
         }
@@ -109,6 +108,19 @@ public class MainActivity extends AppCompatActivity {
                 Intent showFoodEdit = new Intent(getApplicationContext(), FoodEdit.class);
                 showFoodEdit.putExtra("position", position);
                 showFoodEdit.putExtra("ID", ingredients.get(position).ID);
+
+
+                String dateS = ingredients.get(position).getExpiredDate();
+                Date date1 = null;
+                try {
+                    date1 = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
+                    showFoodEdit.putExtra("expireDate", date1.getTime());
+                }catch (Exception e)
+                {
+                    Date today = Calendar.getInstance().getTime();
+                    showFoodEdit.putExtra("expireDate", today.getTime());
+                }
+
                 startActivity(showFoodEdit);
             }
         });

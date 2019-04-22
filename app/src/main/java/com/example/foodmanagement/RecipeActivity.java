@@ -102,8 +102,11 @@ public class RecipeActivity extends AppCompatActivity {
             }
 
             recipeListView = (ListView) findViewById(R.id.recipeLV);
-            RecipeItemAdapter recipeItemAdapter = new RecipeItemAdapter(this, recipes);
-            recipeListView.setAdapter(recipeItemAdapter);
+
+            if(recipes.size()>0) {
+                RecipeItemAdapter recipeItemAdapter = new RecipeItemAdapter(this, recipes);
+                recipeListView.setAdapter(recipeItemAdapter);
+            }
         }
 
 

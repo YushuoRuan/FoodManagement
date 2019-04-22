@@ -90,7 +90,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         // Cursor res = DBhelper.getShoppingData();
         ShoppingCart shoppingCart = new ShoppingCart(DBhelper);
 
-        ArrayList<Ingredient> shoppingIngredients= shoppingCart.getShoppingIngredients();
+        ArrayList<Ingredient> shoppingIngredients = shoppingCart.getShoppingIngredients();
 
 
 
@@ -110,10 +110,10 @@ public class ShoppingListActivity extends AppCompatActivity {
 
 
 
-
-        ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);
-        myListView.setAdapter(shopItemAdapter);
-
+        if(shoppingIngredients.size()>0) {
+            ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);
+            myListView.setAdapter(shopItemAdapter);
+        }
 
 
         // public void checkboxClick(ShopItemAdapter shopItemAdapter, int position){

@@ -18,11 +18,13 @@ import java.util.HashMap;
 import android.util.Log;
 
 
+
 public class ShopItemAdapter extends BaseAdapter {
 
     LayoutInflater shopInflater;
     ArrayList<Ingredient> ingredients;
 
+    DatabaseHelper myDb;
 
 //    private static HashMap<Integer,Boolean> checked=null;
 //    public HashMap<Integer, Boolean> getCheckeds() {
@@ -39,6 +41,8 @@ public class ShopItemAdapter extends BaseAdapter {
 
         shopInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         ingredients = i;
+
+        myDb = new DatabaseHelper(c);
 
 //        checkeds=new HashMap<Integer,Boolean>();
 //        for (int i=0;i<names.size();i++){
@@ -65,33 +69,28 @@ public class ShopItemAdapter extends BaseAdapter {
 
     @Override
    /* public View getView(int position, View convertView, ViewGroup parent) {*/
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
 
          View v = shopInflater.inflate(R.layout.shopping_item_detail, null);
 
         final TextView nameTV = (TextView) v.findViewById(R.id.shopDetailNameTV);
         final TextView amountTV = (TextView) v.findViewById(R.id.shopDetailAmountTV);
         TextView unitTV = (TextView) v.findViewById(R.id.shopDetailUnitTV);
-        Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
+        final Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
 
 
         nameTV.setText(ingredients.get(position).getMaterial());
         amountTV.setText(Double.toString(ingredients.get(position).getAmount()));
         unitTV.setText(ingredients.get(position).getUnit());
 
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Delete item from shopping list table
-            }
-        });
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //delete shopping item from shopping list and database
+                deleteBtn.setText("Deleted!");
+                myDb.deleteShoppingData(ingredients.get(position).ID);
 
-                nameTV.setText("clicked!");
             }
         });
 
