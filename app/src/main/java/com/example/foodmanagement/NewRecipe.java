@@ -21,11 +21,12 @@ public class NewRecipe extends AppCompatActivity {
 
     DatabaseHelper inventoryDB;
     Recipe recipe;
-    String recipeName;
-    String recipeType;
-    String recipeCuisine;
+    String recipeName = "";
+    String recipeType = "";
+    String recipeCuisine = "";
     IngredientList ingList;
     TextView ingredientText;
+    EditText recipeNameText;
 
     int ingPos;
 
@@ -36,6 +37,7 @@ public class NewRecipe extends AppCompatActivity {
 
         init();
         ingredientText = (TextView) findViewById(R.id.ingredientText);
+        recipeNameText = (EditText) findViewById(R.id.recipeNameText);
         // select recipe type
         Spinner recipeTypeSpinner = (Spinner) findViewById(R.id.recipeTypeSpinner);
         final ArrayAdapter<CharSequence> recipeTypeAdapter = ArrayAdapter.createFromResource(this,
@@ -73,7 +75,7 @@ public class NewRecipe extends AppCompatActivity {
         });
 
         // read the recipe name
-        EditText recipeNameText = (EditText) findViewById(R.id.recipeNameText);
+        final EditText recipeNameText = (EditText) findViewById(R.id.recipeNameText);
         
 
         // select ingredient from inventory
@@ -81,16 +83,22 @@ public class NewRecipe extends AppCompatActivity {
         inventoryDB = new DatabaseHelper(this);
         Cursor inventory =  inventoryDB.getInventoryData();
         final List<Integer> idList = new ArrayList<>();
-        List<String> ingredientList = new ArrayList<>();
+        final List<String> ingredientList = new ArrayList<>();
+        final List<String> amountList = new ArrayList<>();
+        final List<String> typeList = new ArrayList<>();
+        final List<String> storageList = new ArrayList<>();
         final List<String> unitList = new ArrayList<>();
         if (inventory.getCount() == 0) {
 
         } else {
             while (inventory.moveToNext()) {
                 idList.add(inventory.getInt(0));
+                typeList.add(inventory.getString(1));
                 String item = inventory.getString(2);
                 ingredientList.add(item);
+                amountList.add(inventory.getString(3));
                 String unit = inventory.getString(4);
+                storageList.add(inventory.getString(5));
                 unitList.add(unit);
             }
         }
@@ -125,7 +133,12 @@ public class NewRecipe extends AppCompatActivity {
                 addIngredientButton.setText("ADDED");
 //                idList.get(ingPos);
 //                Double.parseDouble(ingredientAmount.getText().toString());
-                Ingredient ing = new Ingredient(idList.get(ingPos), Double.parseDouble(ingredientAmount.getText().toString()));
+                double amountWanted = Double.parseDouble(ingredientAmount.getText().toString());
+                Ingredient ing = new Ingredient(idList.get(ingPos), amountWanted);
+                if (amountWanted > Double.parseDouble(amountList.get(ingPos))) {
+                    inventoryDB.insertDataShopping(typeList.get(ingPos), ingredientList.get(ingPos),
+                            amountList.get(ingPos), unitList.get(ingPos), storageList.get(ingPos));
+                }
                 ingList.add(ing);
                 ingredientText.setText(ingList.getInfo().get(0) + '\n' + ingList.getInfo().get(1));
             }
@@ -136,44 +149,17 @@ public class NewRecipe extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
+                recipeName = recipeNameText.getText().toString();
                 recipe = new Recipe(recipeName, recipeType, recipeCuisine, ingList);
                 inventoryDB.insertNewRecipe(recipe);
                 addRecipeButton.setText("ADDED");
             }
         });
 
-//        typeSpinner = (Spinner) findViewById(R.id.foodTypeSpinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.FoodCategories, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        typeSpinner.setAdapter(adapter);
+
     }
 
 
-
-//    private boolean addToInventory(){
-//        String type = typeSpinner.getSelectedItem().toString();
-//        String name = addNameET.getText().toString();
-//        String amount = addAmountET.getText().toString();
-//        String unit = unitSpinner.getSelectedItem().toString();
-//        String storage = storeSpinner.getSelectedItem().toString();
-//
-//
-//        if(type==""|| name==""||amount==""||unit==""||storage==""){
-//            Toast.makeText(addInventoryActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
-//            return false;
-//        }
-//        String date2 = "null";
-//        if(expireDate!=null)
-//            date2 = (expireDate.getMonth()+1)+"/"+expireDate.getDate()+"/"+(expireDate.getYear()+1900);
-//        boolean inserted = myDb.insertDataInventory(type, name, amount, unit, storage, date2, "none");
-//        if(inserted){
-//            Toast.makeText(addInventoryActivity.this, "Added to inventory", Toast.LENGTH_LONG).show();
-//            return true;
-//        }
-//        else{
-//            Toast.makeText(addInventoryActivity.this, "Fail", Toast.LENGTH_LONG).show();
-//            return false;
-//        }
 
     private void init () {
         ingList = new IngredientList();
