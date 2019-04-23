@@ -21,7 +21,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 
-public class RecipeActivity extends AppCompatActivity {
+public class HistoryRecipeActivity extends AppCompatActivity {
 
     ListView recipeListView;
 
@@ -69,30 +69,28 @@ public class RecipeActivity extends AppCompatActivity {
             }
         });
 
-        Button historyRecipeBtn = (Button) findViewById(R.id.historyRecipeBtn);
-        historyRecipeBtn.setOnClickListener(new View.OnClickListener() {
+        Button currentRecipeBtn = (Button) findViewById(R.id.currentRecipeBtn);
+        currentRecipeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent historyRecipeActivity = new Intent(getApplicationContext(), HistoryRecipeActivity.class);
-                startActivity(historyRecipeActivity);
+                Intent currentRecipeActivity = new Intent(getApplicationContext(), RecipeActivity.class);
+                startActivity(currentRecipeActivity);
             }
         });
 
         recipeDB = new DatabaseHelper(this);
         Cursor res = recipeDB.getAllRecipeData();
-        if(res.getCount()>0){
+        if (res.getCount() > 0) {
             ArrayList<Recipe> recipes = new ArrayList<>();
-            while(res.moveToNext())
-            {
+            while (res.moveToNext()) {
                 Integer id = res.getInt(0);
                 String name = res.getString(1);
                 String cuisine = res.getString(2);
                 String type = res.getString(3);
                 String[] IDs = res.getString(4).split(",");
                 String[] amountsS = res.getString(5).split(",");
-                Double []amounts = new Double[amountsS.length];
-                for(int i = 0; i<amountsS.length; i++)
-                {
+                Double[] amounts = new Double[amountsS.length];
+                for (int i = 0; i < amountsS.length; i++) {
                     amounts[i] = Double.parseDouble(amountsS[i]);
                 }
                 IngredientList ingList = new IngredientList(IDs, amounts);
@@ -102,37 +100,10 @@ public class RecipeActivity extends AppCompatActivity {
 
             recipeListView = (ListView) findViewById(R.id.recipeLV);
 
-            if(recipes.size()>0) {
+            if (recipes.size() > 0) {
                 RecipeItemAdapter recipeItemAdapter = new RecipeItemAdapter(this, recipes);
                 recipeListView.setAdapter(recipeItemAdapter);
             }
         }
-
-
-
-
-
-//    public static void setListViewHeightBasedOnChildren(ListView listView) {
-//        ListAdapter listAdapter = listView.getAdapter();
-//        if (listAdapter == null)
-//            return;
-//
-//        int desiredWidth = MeasureSpec.makeMeasureSpec(listView.getWidth(), MeasureSpec.UNSPECIFIED);
-//        int totalHeight = 0;
-//        View view = null;
-//        for (int i = 0; i < listAdapter.getCount(); i++) {
-//            view = listAdapter.getView(i, view, listView);
-//            if (i == 0)
-//                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, LayoutParams.WRAP_CONTENT));
-//
-//            view.measure(desiredWidth, MeasureSpec.UNSPECIFIED);
-//            totalHeight += view.getMeasuredHeight();
-//        }
-//        ViewGroup.LayoutParams params = listView.getLayoutParams();
-//        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-//        listView.setLayoutParams(params);
-//    }
     }
 }
-
-

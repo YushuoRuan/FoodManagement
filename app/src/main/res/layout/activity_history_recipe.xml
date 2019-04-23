@@ -17,7 +17,7 @@
         app:menu="@menu/navigation" />
 
         <Button
-            android:id="@+id/historyRecipeBtn"
+            android:id="@+id/currentRecipeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/currentRecipeText"
+            android:id="@+id/historyRecipeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

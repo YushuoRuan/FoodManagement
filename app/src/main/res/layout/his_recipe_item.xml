@@ -64,7 +64,7 @@
             android:text="List of Ingredients" />
 
     <Button
-        android:id="@+id/currRecipeFinishBtn"
+        android:id="@+id/hisRecipeToCurrentBtn"
         android:layout_width="164dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/currRecipeIngredListTV"
