@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryRecipe">
+    tools:context=".HistoryRecipeActivity">
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -14,9 +15,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation" />
+        app:menu="@menu/navigation" /><![CDATA[
 
-        <Button
+    ="@+id/" />
+
+    ]]>
+
+    <Button
             android:id="@+id/currentRecipeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +43,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
-            android:id="@+id/recipeLV"
+            android:id="@+id/hisRecipeLV"
             android:layout_width="395dp"
             android:layout_height="561dp"
             android:layout_marginStart="8dp"
@@ -52,14 +57,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/newRecipeBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="108dp"
-            android:text="New"
-            app:layout_constraintEnd_toEndOf="@+id/historyRecipeBtn"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/newRecipeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="108dp"
+        android:text="New"
+        app:layout_constraintEnd_toEndOf="@+id/historyRecipeBtn"
+        app:layout_constraintTop_toTopOf="parent" /><![CDATA[
+=======
+    >>>>>>> Stashed changes
 
+]]>
 </android.support.constraint.ConstraintLayout>

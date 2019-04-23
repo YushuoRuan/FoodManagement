@@ -13,7 +13,6 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-
 public class HistoryRecipeItemAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
@@ -48,23 +47,24 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ingredients = recipes.get(position).getIngList();
 
-        View v = mInflater.inflate(R.layout.curr_recipe_item,null);
-        TextView nameTextView = (TextView) v.findViewById(R.id.currRecipeNameTV);
-        TextView cuisineTextView = (TextView) v.findViewById(R.id.currRecipeCuisineTV);
-        TextView typeTextView = (TextView) v.findViewById(R.id.currRecipeTypeTV);
-        TextView availableTV = (TextView) v.findViewById(R.id.currRecipeFracTV);
+        View v = mInflater.inflate(R.layout.his_recipe_item,null);
+        TextView nameTextView = (TextView) v.findViewById(R.id.hisRecipeNameTV);
+        TextView cuisineTextView = (TextView) v.findViewById(R.id.hisRecipeCuisineTV);
+        TextView typeTextView = (TextView) v.findViewById(R.id.hisRecipeTypeTV);
+        TextView availableTV = (TextView) v.findViewById(R.id.hisRecipeFracTV);
 
-        Button currentBtn = (Button) v.findViewById(R.id.hisRecipeToCurrentBtn);
+        final Button hisToCurBtn = (Button) v.findViewById(R.id.hisRecipeToCurrentBtn);
 
-        currentBtn.setOnClickListener(new View.OnClickListener() {
+        hisToCurBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //myDb.subtractDataInventory()
+                myDb.toCurrentRecipe(recipes.get(position).getID());
+                hisToCurBtn.setText("Added to current!");
             }
         });
 

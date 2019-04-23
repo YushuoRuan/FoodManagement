@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class HistoryRecipeActivity extends AppCompatActivity {
 
-    ListView recipeListView;
+    ListView hisRecipeListView;
 
     DatabaseHelper recipeDB;
 
@@ -53,7 +53,7 @@ public class HistoryRecipeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+        setContentView(R.layout.activity_history_recipe);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setSelectedItemId(R.id.navigation_recipe);
@@ -98,11 +98,11 @@ public class HistoryRecipeActivity extends AppCompatActivity {
                 recipes.add(newRecipe);
             }
 
-            recipeListView = (ListView) findViewById(R.id.recipeLV);
+            hisRecipeListView = (ListView) findViewById(R.id.hisRecipeLV);
 
             if (recipes.size() > 0) {
-                RecipeItemAdapter recipeItemAdapter = new RecipeItemAdapter(this, recipes);
-                recipeListView.setAdapter(recipeItemAdapter);
+                HistoryRecipeItemAdapter historyRecipeItemAdapter = new HistoryRecipeItemAdapter(this, recipes);
+                hisRecipeListView.setAdapter(historyRecipeItemAdapter);
             }
         }
     }

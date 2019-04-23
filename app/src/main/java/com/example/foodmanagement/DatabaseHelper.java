@@ -236,6 +236,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //return 1: successful
     public Boolean toHistoryRecipe (Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("update "+RECIPE_TABLE_NAME+" set Current = 0 where ID = " + Integer.toString(id));
+        return true;
+    }
+
+    public Boolean toCurrentRecipe (Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("update "+RECIPE_TABLE_NAME+" set Current = 1 where ID = " + Integer.toString(id));
         return true;
     }
