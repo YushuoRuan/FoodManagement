@@ -35,7 +35,7 @@ public class IngredientList {
     }
 
     public List<String> getInfo () {
-        List<String> info  = new ArrayList<>();
+        List<String> info = new ArrayList<>();
         StringBuilder IDs = new StringBuilder();
         StringBuilder amounts = new StringBuilder();
         for (Ingredient ing :
@@ -46,6 +46,8 @@ public class IngredientList {
         info.add(IDs.toString());
         info.add(amounts.toString());
         return info;
+    }
+    
     public ArrayList<Ingredient> getIngredientList(){
         return ingredientList;
     }
