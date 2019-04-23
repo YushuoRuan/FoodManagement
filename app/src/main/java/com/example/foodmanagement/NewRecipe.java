@@ -1,6 +1,7 @@
 package com.example.foodmanagement;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ public class NewRecipe extends AppCompatActivity {
     TextView ingredientText;
     EditText recipeNameText;
 
-    int ingPos;
+    int ingPos = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,17 +131,23 @@ public class NewRecipe extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                addIngredientButton.setText("ADDED");
-//                idList.get(ingPos);
-//                Double.parseDouble(ingredientAmount.getText().toString());
-                double amountWanted = Double.parseDouble(ingredientAmount.getText().toString());
-                Ingredient ing = new Ingredient(idList.get(ingPos), amountWanted);
-                if (amountWanted > Double.parseDouble(amountList.get(ingPos))) {
-                    inventoryDB.insertDataShopping(typeList.get(ingPos), ingredientList.get(ingPos),
-                            amountList.get(ingPos), unitList.get(ingPos), storageList.get(ingPos));
+                if (ingPos == -1) {
+                    addIngredientButton.setText("Please select ingredient");
+                } else if (ingredientAmount.getText().toString().equals("")) {
+                    addIngredientButton.setText("Please input amount");
+                } else {
+                    addIngredientButton.setText("Added current ingredient");
+                    double amountWanted = Double.parseDouble(ingredientAmount.getText().toString());
+                    ingredientAmount.getText().clear();
+                    Ingredient ing = new Ingredient(idList.get(ingPos), amountWanted);
+                    if (amountWanted > Double.parseDouble(amountList.get(ingPos))) {
+                        inventoryDB.insertDataShopping(typeList.get(ingPos), ingredientList.get(ingPos),
+                                amountList.get(ingPos), unitList.get(ingPos), storageList.get(ingPos));
+                    }
+                    ingList.add(ing);
+                    ingredientText.setText(ingList.getInfo().get(0) + '\n' + ingList.getInfo().get(1));
                 }
-                ingList.add(ing);
-                ingredientText.setText(ingList.getInfo().get(0) + '\n' + ingList.getInfo().get(1));
+
             }
         });
 
@@ -153,6 +160,8 @@ public class NewRecipe extends AppCompatActivity {
                 recipe = new Recipe(recipeName, recipeType, recipeCuisine, ingList);
                 inventoryDB.insertNewRecipe(recipe);
                 addRecipeButton.setText("ADDED");
+                finish();
+                startActivity(new Intent(getApplicationContext(), RecipeActivity.class));
             }
         });
 
