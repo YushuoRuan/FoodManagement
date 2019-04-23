@@ -25,7 +25,7 @@ public class RecipeActivity extends AppCompatActivity {
 
     ListView recipeListView;
 
-    DatabaseHelperRecipe recipeDB;
+    DatabaseHelper recipeDB;
 
     ArrayList<Recipe> recipes;
 
@@ -78,7 +78,7 @@ public class RecipeActivity extends AppCompatActivity {
             }
         });
 
-        recipeDB = new DatabaseHelperRecipe(this);
+        recipeDB = new DatabaseHelper(this);
         Cursor res = recipeDB.getAllRecipeData();
         if(res.getCount()>0){
             ArrayList<Recipe> recipes = new ArrayList<>();

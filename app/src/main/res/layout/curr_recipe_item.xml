@@ -61,7 +61,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="35dp"
         android:layout_marginTop="27dp"
-        android:text="None            amount unit" />
+        android:text="List of Ingredients" />
 
     <Button
         android:id="@+id/currRecipeFinishBtn"

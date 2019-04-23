@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,12 +19,15 @@ public class RecipeItemAdapter extends BaseAdapter {
 
     ArrayList<Recipe> recipes;
 
-    DatabaseHelperRecipe recipeDB;
+    IngredientList ingredients;
+
+    DatabaseHelper myDb;
 
     public RecipeItemAdapter(Context c, ArrayList<Recipe> r){
 
         recipes = r;
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        myDb = new DatabaseHelper(c);
     }
 
     @Override
@@ -44,12 +48,32 @@ public class RecipeItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = mInflater.inflate(R.layout.inventory_item_detail,null);
-        TextView nameTextView = (TextView) v.findViewById(R.id.nameTV);
-        TextView cuisineTextView = (TextView) v.findViewById(R.id.cuisineTV);
-        TextView typeTextView = (TextView) v.findViewById(R.id.cuisineTypeTV);
-        TextView availableTV = (TextView) v.findViewById(R.id.availableTV);
 
+        ingredients = recipes.get(position).getIngList();
+
+        View v = mInflater.inflate(R.layout.curr_recipe_item,null);
+        TextView nameTextView = (TextView) v.findViewById(R.id.currRecipeNameTV);
+        TextView cuisineTextView = (TextView) v.findViewById(R.id.currRecipeCuisineTV);
+        TextView typeTextView = (TextView) v.findViewById(R.id.currRecipeTypeTV);
+        TextView availableTV = (TextView) v.findViewById(R.id.currRecipeFracTV);
+
+        Button finishBtn = (Button) v.findViewById(R.id.currRecipeFinishBtn);
+        Button cancelBtn = (Button) v.findViewById(R.id.currRecipeCancelBtn);
+
+        finishBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //myDb.subtractDataInventory()
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         nameTextView.setText(recipes.get(position).getName());
         cuisineTextView.setText(recipes.get(position).getCuisine());
@@ -61,7 +85,6 @@ public class RecipeItemAdapter extends BaseAdapter {
 
     private String getIngredientFraction(int position){
 
-        String[] ingredients = recipes.get(position).getIngredients();
-        return "0/"+ingredients.length;
+        return "0/"+ingredients.length();
     }
 }

@@ -30,4 +30,7 @@ public class IngredientList {
             System.out.print(ing);
         }
     }
+    public int length(){
+        return ingredientList.size();
+    }
 }
