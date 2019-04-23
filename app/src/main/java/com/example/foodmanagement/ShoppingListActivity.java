@@ -100,22 +100,6 @@ public class ShoppingListActivity extends AppCompatActivity {
 
 
 
-
-
-        // Resources res = getResources();
-        // myListView = (ListView) findViewById(R.id.shoppingListView);
-        // names = res.getStringArray(R.array.Names);
-        // amounts = res.getIntArray(R.array.Amount);
-        // units = res.getStringArray(R.array.Units);
-
-
-
-        // final ArrayList<String> names = initNames();
-        // final ArrayList<String> amounts = initAmounts();
-        // final ArrayList<String> units = initUnits();
-
-
-
         if(shoppingIngredients.size()>0) {
             final ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);
             myListView.setAdapter(shopItemAdapter);
@@ -132,27 +116,5 @@ public class ShoppingListActivity extends AppCompatActivity {
             });
         }
     }
-
-
-
-
-        /*public void checkboxClick(ShopItemAdapter ShopItemAdapter, int position){
-
-
-             String s = names.get(position);
-             Log.d("String","s");
-             if (ShopItemAdapter.getCheckeds().get(position)==true) {
-                 ShopItemAdapter.getCheckeds().put(position, false);
-
-             }else{
-
-                 ShopItemAdapter.getCheckeds().put(position, true);
-             }
-            ShopItemAdapter.notifyDataSetChanged();
-
-
-         }*/
-
-
 }
 

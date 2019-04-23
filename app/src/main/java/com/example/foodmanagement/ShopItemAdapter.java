@@ -71,6 +71,7 @@ public class ShopItemAdapter extends BaseAdapter {
         return ingredients.get(position).ID;
     }
 
+
     @Override
    /* public View getView(int position, View convertView, ViewGroup parent) {*/
     public View getView(final int position, View view, ViewGroup parent) {
@@ -81,6 +82,7 @@ public class ShopItemAdapter extends BaseAdapter {
         final TextView amountTV = (TextView) v.findViewById(R.id.shopDetailAmountTV);
         final TextView unitTV = (TextView) v.findViewById(R.id.shopDetailUnitTV);
         final Button deleteBtn = (Button) v.findViewById(R.id.shopDetailDeleteBtn);
+        final CheckBox ckb = (CheckBox) v.findViewById(R.id.checkBox);
 
 
         nameTV.setText(ingredients.get(position).getMaterial());
@@ -94,6 +96,8 @@ public class ShopItemAdapter extends BaseAdapter {
                 //delete shopping item from shopping list and database
                 deleteBtn.setText("Deleted!");
                 myDb.deleteShoppingData(ingredients.get(position).ID);
+
+
 
             }
         });
@@ -118,6 +122,18 @@ public class ShopItemAdapter extends BaseAdapter {
         holder.ckb.setChecked(getChecked().get(position));
 
 
+        ckb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDb.deleteShoppingData(ingredients.get(position).ID);
+                myDb.insertDataInventory(ingredients.get(position).getType(), ingredients.get(position).getMaterial(),
+                        Double.toString(ingredients.get(position).getAmount()), ingredients.get(position).getUnit(),
+                        ingredients.get(position).getStorage(), "null", "null");
+            }
+        });
+
+
+
         return v;
     }
     class ViewHolder{
@@ -131,13 +147,3 @@ public class ShopItemAdapter extends BaseAdapter {
 
 
 
-//     }
-//     class ViewHolder{
-//         private TextView nameTV;
-//         private TextView amountTV;
-//         private TextView unitTV;
-
-//         public CheckBox ckb;
-
-//     }
-// }
