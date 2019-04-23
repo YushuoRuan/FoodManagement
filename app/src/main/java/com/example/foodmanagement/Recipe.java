@@ -1,8 +1,12 @@
 package com.example.foodmanagement;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recipe {
 
+    private boolean current;
     private Integer ID;
     private String name;
     private String type;
@@ -11,6 +15,7 @@ public class Recipe {
     private IngredientList ingList;
 
     public Recipe(Integer id, String n, String t, String c, IngredientList ingList){
+        current = true;
         ID = id;
         name = n;
         type = t;
@@ -49,5 +54,23 @@ public class Recipe {
 
     public void setIngList(IngredientList ingList) {
         this.ingList = ingList;
+    }
+
+    public boolean isCurrent() {
+        return current;
+    }
+
+    public void setCurrent(boolean current) {
+        this.current = current;
+    }
+
+    List<String> getInfo () {
+        List<String> info = new ArrayList<>();
+        info.add(Boolean.toString(current));
+        info.add(name);
+        info.add(type);
+        info.add(cuisine);
+        info.addAll(ingList.getInfo());
+        return info;
     }
 }

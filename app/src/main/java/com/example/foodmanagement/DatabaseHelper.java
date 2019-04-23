@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -175,25 +176,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //insert one ingredient to shopping table
     //return false: unsuccessful
     //return true: successful
-    public boolean insertRecipe(String curr, String n, String t, String cuis, String ingreds, String amounts, String units){
+
+    public boolean insertNewRecipe(Recipe recipe) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLR_1, curr);
-        contentValues.put(COLR_2, n);
-        contentValues.put(COLR_3, t);
-        contentValues.put(COLR_4, cuis);
-        contentValues.put(COLR_5, ingreds);
-        contentValues.put(COLR_6, amounts);
-        contentValues.put(COLR_7, units);
+        List<String> recipeInfo = recipe.getInfo();
+        contentValues.put(COLR_1, recipeInfo.get(0));
+        contentValues.put(COLR_2, recipeInfo.get(1));
+        contentValues.put(COLR_3, recipeInfo.get(2));
+        contentValues.put(COLR_4, recipeInfo.get(3));
+        contentValues.put(COLR_5, recipeInfo.get(4));
+        contentValues.put(COLR_6, recipeInfo.get(5));
 
         long result = db.insert(RECIPE_TABLE_NAME, null, contentValues);
         if(result == -1)
             return false;
         else
             return true;
-
     }
+
+//    public boolean insertRecipe(String curr, String n, String t, String cuis, String ingreds, String amounts, String units){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put(COLR_1, curr);
+//        contentValues.put(COLR_2, n);
+//        contentValues.put(COLR_3, t);
+//        contentValues.put(COLR_4, cuis);
+//        contentValues.put(COLR_5, ingreds);
+//        contentValues.put(COLR_6, amounts);
+//        contentValues.put(COLR_7, units);
+//
+//        long result = db.insert(RECIPE_TABLE_NAME, null, contentValues);
+//        if(result == -1)
+//            return false;
+//        else
+//            return true;
+//
+//    }
     //get all data in Recipe table
     //return multiple lines dataframe
     public Cursor getAllRecipeData() {

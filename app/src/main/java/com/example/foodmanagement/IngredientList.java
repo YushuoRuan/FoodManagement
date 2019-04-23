@@ -34,6 +34,18 @@ public class IngredientList {
         return ingredientList.size();
     }
 
+    public List<String> getInfo () {
+        List<String> info  = new ArrayList<>();
+        StringBuilder IDs = new StringBuilder();
+        StringBuilder amounts = new StringBuilder();
+        for (Ingredient ing :
+                ingredientList) {
+            IDs.append(Integer.toString(ing.ID)).append(',');
+            amounts.append(Double.toString(ing.getAmount())).append(',');
+        }
+        info.add(IDs.toString());
+        info.add(amounts.toString());
+        return info;
     public ArrayList<Ingredient> getIngredientList(){
         return ingredientList;
     }
