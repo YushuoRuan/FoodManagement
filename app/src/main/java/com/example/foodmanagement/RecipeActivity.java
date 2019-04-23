@@ -79,7 +79,7 @@ public class RecipeActivity extends AppCompatActivity {
         });
 
         recipeDB = new DatabaseHelper(this);
-        Cursor res = recipeDB.getAllRecipeData();
+        Cursor res = recipeDB.getCurrRecipeData();
         if(res.getCount()>0){
             ArrayList<Recipe> recipes = new ArrayList<>();
             while(res.moveToNext())

@@ -222,6 +222,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getCurrRecipeData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+RECIPE_TABLE_NAME + " where Current = 1", null);
+        return res;
+    }
+
+    public Cursor getHistRecipeData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from "+RECIPE_TABLE_NAME + " where Current = 0", null);
+        return res;
+    }
+
     //get one recipe from recipe table
     //return one line dataframe
     public Cursor getRecipe(Integer id) {
