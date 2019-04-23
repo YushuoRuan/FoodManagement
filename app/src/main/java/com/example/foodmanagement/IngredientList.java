@@ -16,6 +16,7 @@ public class IngredientList {
     }
 
     public IngredientList (String[] IDs, Double[] amounts) {
+        ingredientList = new ArrayList<>();
         for (int i = 0; i < IDs.length; i++) {
             Ingredient ing = new Ingredient(Integer.parseInt(IDs[i]), amounts[i]);
             ingredientList.add(ing);

@@ -59,8 +59,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/currRecipeNameTV"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="14dp"
         android:text="List of Ingredients" />
 
     <Button
@@ -69,8 +69,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/currRecipeIngredListTV"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="26dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="#A6ED92"
         android:text="Finish"
         android:textSize="12sp" />
@@ -81,8 +81,16 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/currRecipeIngredListTV"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="43dp"
         android:text="Cancel"
         android:textSize="12sp" />
+
+    <Space
+        android:layout_width="274dp"
+        android:layout_height="14dp"
+        android:layout_below="@+id/currRecipeFinishBtn"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="5dp" />
 </RelativeLayout>

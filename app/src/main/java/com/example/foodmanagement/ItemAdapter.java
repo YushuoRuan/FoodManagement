@@ -63,6 +63,7 @@ public class ItemAdapter extends BaseAdapter {
         TextView storageTextView = (TextView) v.findViewById(R.id.storageTV);
         ImageView foodTypeImg = (ImageView) v.findViewById(R.id.foodTypeImg);
 
+        //foodTypeImg.setImageResource(R.mipmap.meatIm);
 
         String name = names[position];
         String amount =amounts[position];

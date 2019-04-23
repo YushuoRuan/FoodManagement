@@ -42,9 +42,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLR_2 = "Name";
     public static final String COLR_3 = "Type"; //main dish, appetizer
     public static final String COLR_4 = "Cuisine"; //asian, american
-    public static final String COLR_5 = "Ingredients";//"tomato,egg,ketchup"
+    public static final String COLR_5 = "IDs";//"tomato,egg,ketchup"
     public static final String COLR_6 = "Amounts";//"1, 2, 0.3"
-    public static final String COLR_7 = "Units";//"individual, individual, oz"
 
 
     public DatabaseHelper(Context context) {
@@ -56,7 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + INVENTORY_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Type Text, Name Text, Amount REAL, Unit TEXT, Storage TEXT, Expire TEXT, Tags TEXT)");
         db.execSQL("create table " + SHOPPING_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Type Text, Name Text, Amount REAL, Unit TEXT, Storage TEXT, Expire TEXT, Tags TEXT)");
-        db.execSQL("create table " + RECIPE_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Current INTEGER, Name TEXT, Type TEXT, Cuisine TEXT, Ingredients TEXT, Amounts TEXT, Units TEXT)");
+        db.execSQL("create table " + RECIPE_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Current INTEGER, Name TEXT, Type TEXT, Cuisine TEXT, IDs TEXT, Amounts TEXT)");
     }
 
     @Override
