@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/currRecipeNameTV"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:text="Name"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/currRecipeCuisineTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="22dp"
+        android:layout_toEndOf="@+id/currRecipeNameTV"
+        android:text="Cuisine" />
+
+    <TextView
+        android:id="@+id/currRecipeTypeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="44dp"
+        android:layout_toEndOf="@+id/currRecipeNameTV"
+        android:text="Type" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="25dp"
+        android:text="Ingredients:" />
+
+    <TextView
+        android:id="@+id/currRecipeFracTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="25dp"
+        android:text="0/0" />
+
+    <TextView
+        android:id="@+id/currRecipeIngredListTV"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/currRecipeNameTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="27dp"
+        android:text="None            amount unit" />
+
+    <Button
+        android:id="@+id/currRecipeFinishBtn"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/currRecipeIngredListTV"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="26dp"
+        android:backgroundTint="#A6ED92"
+        android:text="Finish"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/currRecipeCancelBtn"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/currRecipeIngredListTV"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="44dp"
+        android:text="Cancel"
+        android:textSize="12sp" />
+</RelativeLayout>
