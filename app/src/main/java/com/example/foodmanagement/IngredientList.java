@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientList {
-    private List<Ingredient> ingredientList;
+    private ArrayList<Ingredient> ingredientList;
 
     public IngredientList () {
         ingredientList = new ArrayList<>();
@@ -32,5 +32,9 @@ public class IngredientList {
     }
     public int length(){
         return ingredientList.size();
+    }
+
+    public ArrayList<Ingredient> getIngredientList(){
+        return ingredientList;
     }
 }

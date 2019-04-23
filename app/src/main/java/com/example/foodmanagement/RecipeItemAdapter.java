@@ -47,7 +47,7 @@ public class RecipeItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ingredients = recipes.get(position).getIngList();
 
@@ -57,21 +57,26 @@ public class RecipeItemAdapter extends BaseAdapter {
         TextView typeTextView = (TextView) v.findViewById(R.id.currRecipeTypeTV);
         TextView availableTV = (TextView) v.findViewById(R.id.currRecipeFracTV);
 
-        Button finishBtn = (Button) v.findViewById(R.id.currRecipeFinishBtn);
-        Button cancelBtn = (Button) v.findViewById(R.id.currRecipeCancelBtn);
+        final Button finishBtn = (Button) v.findViewById(R.id.currRecipeFinishBtn);
+        final Button cancelBtn = (Button) v.findViewById(R.id.currRecipeCancelBtn);
 
         finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //myDb.subtractDataInventory()
+                for(int i = 0; i < ingredients.length(); i++) {
+                    myDb.subtractDataInventory(ingredients.getIngredientList().get(i).ID,
+                            ingredients.getIngredientList().get(i).getAmount());
+                }
+                myDb.toHistoryRecipe(recipes.get(position).getID());
+                finishBtn.setText("Enjoy!!");
             }
         });
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                myDb.toHistoryRecipe(recipes.get(position).getID());
+                cancelBtn.setText("Removed!");
             }
         });
 
