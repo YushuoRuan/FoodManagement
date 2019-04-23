@@ -1,6 +1,7 @@
 package com.example.foodmanagement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Recipe {
 
@@ -11,6 +12,7 @@ public class Recipe {
     private String[] ingredients;
     private Double[] amounts;
     private String[] units;
+    private IngredientList ingList;
 
     public Recipe(Integer id, String n, String t, String c, String[] i, Double[] a, String[] u){
         ID = id;
@@ -20,6 +22,15 @@ public class Recipe {
         ingredients = i;
         amounts = a;
         units = u;
+        ingList = new IngredientList();
+    }
+
+    public Recipe (String n, String t, String c, String[] i, Double[] a, String[] u){
+        this(0, n, t, c, i, a, u);
+    }
+
+    public Recipe () {
+
     }
 
     public Integer getID() {

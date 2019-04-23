@@ -16,6 +16,8 @@ import java.util.List;
 public class NewRecipe extends AppCompatActivity {
 
     DatabaseHelper inventoryDB;
+    Recipe recipe;
+    String recipeType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,17 @@ public class NewRecipe extends AppCompatActivity {
                 R.array.recipeType, android.R.layout.simple_spinner_item);
         recipeTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         recipeTypeSpinner.setAdapter(recipeTypeAdapter);
+        recipeTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         // select recipe cuisine
         Spinner recipeCuisineSpinner = (Spinner) findViewById(R.id.recipeCuisineSpinner);

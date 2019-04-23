@@ -37,12 +37,12 @@
 
             <Spinner
                 android:id="@+id/recipeTypeSpinner"
-                android:layout_width="match_parent"
+                android:layout_width="217dp"
                 android:layout_height="wrap_content" />
 
             <Spinner
                 android:id="@+id/recipeCuisineSpinner"
-                android:layout_width="match_parent"
+                android:layout_width="217dp"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -56,12 +56,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Recipe Name" />
+                android:hint="Recipe Name"
+                android:inputType="textPersonName" />
 
             <Spinner
                 android:id="@+id/selectIngredientSpinner"
-                android:layout_width="match_parent"
+                android:layout_width="217dp"
                 android:layout_height="wrap_content" />
 
             <EditText
@@ -69,8 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Amount" />
+                android:hint="Amount"
+                android:inputType="number|numberDecimal" />
 
             <TextView
                 android:id="@+id/ingredientUnitText"
@@ -83,6 +83,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Ingredient" />
+
+            <TextView
+                android:id="@+id/ingredientText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You have no ingredient in this reciepe yet." />
+
+            <Button
+                android:id="@+id/addRecipeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Recipe" />
 
         </LinearLayout>
     </ScrollView>

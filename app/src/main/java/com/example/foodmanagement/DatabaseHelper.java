@@ -15,35 +15,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "FoodManagement.db";
 
     public static final String INVENTORY_TABLE_NAME = "inventory_table";
-    public static final String COLI_1 = "ID";
-    public static final String COLI_2 = "Type";
-    public static final String COLI_3 = "Name";
-    public static final String COLI_4 = "Amount";
-    public static final String COLI_5 = "Unit";
-    public static final String COLI_6 = "Storage";
-    public static final String COLI_7 = "Expire";
-    public static final String COLI_8 = "Tags";
+    public static final String COLI_0 = "ID";
+    public static final String COLI_1 = "Type";
+    public static final String COLI_2 = "Name";
+    public static final String COLI_3 = "Amount";
+    public static final String COLI_4 = "Unit";
+    public static final String COLI_5 = "Storage";
+    public static final String COLI_6 = "Expire";
+    public static final String COLI_7 = "Tags";
 
     public static final String SHOPPING_TABLE_NAME = "shoppinglist_table";
-    public static final String COLS_1 = "ID";
-    public static final String COLS_2 = "Type";
-    public static final String COLS_3 = "Name";
-    public static final String COLS_4 = "Amount";
-    public static final String COLS_5 = "Unit";
-    public static final String COLS_6 = "Storage";
-    public static final String COLS_7 = "Expire";
-    public static final String COLS_8 = "Tags";
+    public static final String COLS_0 = "ID";
+    public static final String COLS_1 = "Type";
+    public static final String COLS_2 = "Name";
+    public static final String COLS_3 = "Amount";
+    public static final String COLS_4 = "Unit";
+    public static final String COLS_5 = "Storage";
+    public static final String COLS_6 = "Expire";
+    public static final String COLS_7 = "Tags";
 
 
     public static final String RECIPE_TABLE_NAME = "recipe_table";
-    public static final String COLR_1 = "ID";
-    public static final String COLR_2 = "Current"; //1:current 0:history
-    public static final String COLR_3 = "Name";
-    public static final String COLR_4 = "Type"; //main dish, appetizer
-    public static final String COLR_5 = "Cuisine"; //asian, american
-    public static final String COLR_6 = "Ingredients";//"tomato,egg,ketchup"
-    public static final String COLR_7 = "Amounts";//"1, 2, 0.3"
-    public static final String COLR_8 = "Units";//"individual, individual, oz"
+    public static final String COLR_0 = "ID";
+    public static final String COLR_1 = "Current"; //1:current 0:history
+    public static final String COLR_2 = "Name";
+    public static final String COLR_3 = "Type"; //main dish, appetizer
+    public static final String COLR_4 = "Cuisine"; //asian, american
+    public static final String COLR_5 = "Ingredients";//"tomato,egg,ketchup"
+    public static final String COLR_6 = "Amounts";//"1, 2, 0.3"
+    public static final String COLR_7 = "Units";//"individual, individual, oz"
 
 
     public DatabaseHelper(Context context) {
@@ -73,13 +73,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLI_2, t);
-        contentValues.put(COLI_3, n);
-        contentValues.put(COLI_4, a);
-        contentValues.put(COLI_5, u);
-        contentValues.put(COLI_6, s);
-        contentValues.put(COLI_7, e);
-        contentValues.put(COLI_8, tags);
+        contentValues.put(COLI_1, t);
+        contentValues.put(COLI_2, n);
+        contentValues.put(COLI_3, a);
+        contentValues.put(COLI_4, u);
+        contentValues.put(COLI_5, s);
+        contentValues.put(COLI_6, e);
+        contentValues.put(COLI_7, tags);
 
         long result = db.insert(INVENTORY_TABLE_NAME, null, contentValues);
         if(result == -1)
@@ -142,13 +142,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLS_2, t);
-        contentValues.put(COLS_3, n);
-        contentValues.put(COLS_4, a);
-        contentValues.put(COLS_5, u);
-        contentValues.put(COLS_6, s);
+        contentValues.put(COLS_1, t);
+        contentValues.put(COLS_2, n);
+        contentValues.put(COLS_3, a);
+        contentValues.put(COLS_4, u);
+        contentValues.put(COLS_5, s);
+        contentValues.put(COLS_6, "null");
         contentValues.put(COLS_7, "null");
-        contentValues.put(COLS_8, "null");
 
         long result = db.insert(SHOPPING_TABLE_NAME, null, contentValues);
         if(result == -1)
@@ -179,13 +179,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLR_2, curr);
-        contentValues.put(COLR_3, n);
-        contentValues.put(COLR_4, t);
-        contentValues.put(COLR_5, cuis);
-        contentValues.put(COLR_6, ingreds);
-        contentValues.put(COLR_7, amounts);
-        contentValues.put(COLR_8, units);
+        contentValues.put(COLR_1, curr);
+        contentValues.put(COLR_2, n);
+        contentValues.put(COLR_3, t);
+        contentValues.put(COLR_4, cuis);
+        contentValues.put(COLR_5, ingreds);
+        contentValues.put(COLR_6, amounts);
+        contentValues.put(COLR_7, units);
 
         long result = db.insert(RECIPE_TABLE_NAME, null, contentValues);
         if(result == -1)

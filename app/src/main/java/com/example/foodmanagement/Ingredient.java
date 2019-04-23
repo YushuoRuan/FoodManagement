@@ -1,11 +1,10 @@
 package com.example.foodmanagement;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Ingredient {
 
-    public Integer ID;
+    public int ID;
     private String type;
     private String material;
     private double amount;
@@ -15,13 +14,24 @@ public class Ingredient {
     private ArrayList<String> tags = new ArrayList<>();
 
     //init
-    public Ingredient(Integer I, String t, String m, double a, String u, String s){
+    public Ingredient(int I, String t, String m, double a, String u, String s){
         ID=I;
         type = t;
         material = m;
         amount = a;
         unit = u;
         storage = s;
+    }
+
+    public Ingredient (int id, double amount) {
+        ID = id;
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString () {
+
+        return null;
     }
 
     //setters
