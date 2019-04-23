@@ -1,6 +1,7 @@
 package com.example.foodmanagement;
 
 import android.content.Intent;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
@@ -96,8 +97,8 @@ public class RecipeActivity extends AppCompatActivity {
                     continue;
                 for(int i = 0; i<amountsS.length; i++)
                 {
-                    if(amountsS[i]=="")
-                        break;
+                    if(amountsS[i]==""){
+                        break;}
                     amounts[i] = Double.parseDouble(amountsS[i]);
                 }
                 if(amountsS.length!=IDs.length)
