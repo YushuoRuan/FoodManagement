@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Recipe {
 
-    private boolean current;
+    private int current;
     private Integer ID;
     private String name;
     private String type;
@@ -15,7 +15,7 @@ public class Recipe {
     private IngredientList ingList;
 
     public Recipe(Integer id, String n, String t, String c, IngredientList ingList){
-        current = true;
+        current = 1;
         ID = id;
         name = n;
         type = t;
@@ -56,17 +56,17 @@ public class Recipe {
         this.ingList = ingList;
     }
 
-    public boolean isCurrent() {
+    public int isCurrent() {
         return current;
     }
 
-    public void setCurrent(boolean current) {
+    public void setCurrent(int current) {
         this.current = current;
     }
 
     List<String> getInfo () {
         List<String> info = new ArrayList<>();
-        info.add(Boolean.toString(current));
+        info.add(Integer.toString(current));
         info.add(name);
         info.add(type);
         info.add(cuisine);

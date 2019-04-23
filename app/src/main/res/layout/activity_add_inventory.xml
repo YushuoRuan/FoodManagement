@@ -118,7 +118,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="Amount"
-                    android:inputType="textPersonName" />
+                    android:inputType="number|numberDecimal" />
 
                 <Space
                     android:layout_width="44dp"
