@@ -88,16 +88,15 @@ public class RecipeActivity extends AppCompatActivity {
                 String name = res.getString(1);
                 String cuisine = res.getString(2);
                 String type = res.getString(3);
-                String[] ingredients = res.getString(4).split(",");
+                String[] IDs = res.getString(4).split(",");
                 String[] amountsS = res.getString(5).split(",");
-                String[] units = res.getString(6).split(",");
                 Double []amounts = new Double[amountsS.length];
                 for(int i = 0; i<amountsS.length; i++)
                 {
                     amounts[i] = Double.parseDouble(amountsS[i]);
                 }
-
-                Recipe newRecipe = new Recipe(id, name, cuisine, type, ingredients,amounts,units);
+                IngredientList ingList = new IngredientList(IDs, amounts);
+                Recipe newRecipe = new Recipe(id, name, cuisine, type, ingList);
                 recipes.add(newRecipe);
             }
 
