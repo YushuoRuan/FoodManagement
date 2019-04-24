@@ -74,7 +74,7 @@ public class RecipeActivity extends AppCompatActivity {
         historyRecipeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent historyRecipeActivity = new Intent(getApplicationContext(), HistoryRecipeActivity.class);
+                Intent historyRecipeActivity = new Intent(getApplicationContext(),HistRecipeActivity.class);
                 startActivity(historyRecipeActivity);
             }
         });
@@ -92,6 +92,7 @@ public class RecipeActivity extends AppCompatActivity {
                 String cuisine = res.getString(4);
                 String[] IDs = res.getString(5).split(",");
                 String [] Names = res.getString(6).split(",");
+                String a = res.getString(7);
                 String[] amountsS = res.getString(7).split(",");
                 Double []amounts = new Double[amountsS.length];
                 if(amountsS[0]=="" || IDs[0]=="")

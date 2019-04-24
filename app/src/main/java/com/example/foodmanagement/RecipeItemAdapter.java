@@ -87,14 +87,14 @@ public class RecipeItemAdapter extends BaseAdapter {
         nameTextView.setText(recipes.get(position).getName());
         cuisineTextView.setText(recipes.get(position).getCuisine());
         typeTextView.setText(recipes.get(position).getType());
-        availableTV.setText(getIngredientFraction(position));
+        availableTV.setText(getIngredientFraction());
         ingredientListTV.setText(getIngredientListText(ingredients));
 
 
         return v;
     }
 
-    private String getIngredientFraction(int position){
+    private String getIngredientFraction(){
 
         return "0/"+ingredients.length();
     }

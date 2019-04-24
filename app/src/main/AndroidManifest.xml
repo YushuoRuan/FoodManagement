@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewRecipe"></activity>
+        <activity android:name=".HistRecipeActivity"></activity>
+        <activity android:name=".Test" />
+        <activity android:name=".NewRecipe" />
         <activity android:name=".HistoryRecipe" />
         <activity android:name=".AddShopingListActivity" />
         <activity android:name=".RecipeActivity" />

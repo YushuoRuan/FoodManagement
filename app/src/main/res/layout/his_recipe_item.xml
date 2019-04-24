@@ -69,8 +69,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/hisRecipeIngredListTV"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="140dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="123dp"
         android:layout_marginTop="9dp"
+        android:layout_marginEnd="124dp"
         android:backgroundTint="#A6ED92"
         android:text="Add to current"
         android:textSize="12sp" />

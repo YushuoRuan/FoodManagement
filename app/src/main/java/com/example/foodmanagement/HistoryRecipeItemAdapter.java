@@ -1,6 +1,7 @@
 package com.example.foodmanagement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -24,11 +25,14 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
 
     DatabaseHelper myDb;
 
+    Context context;
+
     public HistoryRecipeItemAdapter(Context c, ArrayList<Recipe> r){
 
         recipes = r;
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         myDb = new DatabaseHelper(c);
+        context = c;
     }
 
     @Override
@@ -67,6 +71,8 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
 
                 myDb.toCurrentRecipe(recipes.get(position).getID());
                 hisToCurBtn.setText("Added to current!");
+                Intent showRecipe = new Intent(context, RecipeActivity.class);
+                context.startActivity(showRecipe);
             }
         });
 
@@ -81,6 +87,7 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
     }
 
     private String getIngredientFraction(int position){
+
 
         return "0/"+ingredients.length();
     }
