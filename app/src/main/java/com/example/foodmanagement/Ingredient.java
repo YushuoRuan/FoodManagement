@@ -28,6 +28,12 @@ public class Ingredient {
         this.amount = amount;
     }
 
+    public Ingredient(int id, String type, double amount) {
+        ID = id;
+        this.type = type;
+        this.amount = amount;
+    }
+
     @Override
     public String toString () {
 

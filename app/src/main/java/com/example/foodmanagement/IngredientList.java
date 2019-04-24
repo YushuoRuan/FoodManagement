@@ -37,14 +37,14 @@ public class IngredientList {
 
     public List<String> getInfo () {
         List<String> info = new ArrayList<>();
-        StringBuilder IDs = new StringBuilder();
+        StringBuilder names = new StringBuilder();
         StringBuilder amounts = new StringBuilder();
         for (Ingredient ing :
                 ingredientList) {
-            IDs.append(Integer.toString(ing.ID)).append(',');
+            names.append(ing.getType()).append(',');
             amounts.append(Double.toString(ing.getAmount())).append(',');
         }
-        info.add(IDs.toString());
+        info.add(names.toString());
         info.add(amounts.toString());
         return info;
     }

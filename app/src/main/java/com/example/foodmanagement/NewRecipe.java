@@ -139,10 +139,11 @@ public class NewRecipe extends AppCompatActivity {
                     addIngredientButton.setText("Added current ingredient");
                     double amountWanted = Double.parseDouble(ingredientAmount.getText().toString());
                     ingredientAmount.getText().clear();
-                    Ingredient ing = new Ingredient(idList.get(ingPos), amountWanted);
+                    Ingredient ing = new Ingredient(idList.get(ingPos), ingredientList.get(ingPos), amountWanted);
                     if (amountWanted > Double.parseDouble(amountList.get(ingPos))) {
+                        double amountDiff = amountWanted - Double.parseDouble(amountList.get(ingPos));
                         inventoryDB.insertDataShopping(typeList.get(ingPos), ingredientList.get(ingPos),
-                                amountList.get(ingPos), unitList.get(ingPos), storageList.get(ingPos));
+                                 String.valueOf(amountDiff), unitList.get(ingPos), storageList.get(ingPos));
                     }
                     ingList.add(ing);
                     ingredientText.setText(ingList.getInfo().get(0) + '\n' + ingList.getInfo().get(1));
