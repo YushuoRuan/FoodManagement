@@ -1,6 +1,7 @@
 package com.example.foodmanagement;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,7 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
         TextView cuisineTextView = (TextView) v.findViewById(R.id.hisRecipeCuisineTV);
         TextView typeTextView = (TextView) v.findViewById(R.id.hisRecipeTypeTV);
         TextView availableTV = (TextView) v.findViewById(R.id.hisRecipeFracTV);
+        final TextView  ingredientListTV = (TextView) v.findViewById(R.id.hisRecipeIngredListTV);
 
         final Button hisToCurBtn = (Button) v.findViewById(R.id.hisRecipeToCurrentBtn);
 
@@ -73,6 +75,7 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
         cuisineTextView.setText(recipes.get(position).getCuisine());
         typeTextView.setText(recipes.get(position).getType());
         availableTV.setText(getIngredientFraction(position));
+        ingredientListTV.setText(getIngredientListText(ingredients));
 
         return v;
     }
@@ -80,5 +83,18 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
     private String getIngredientFraction(int position){
 
         return "0/"+ingredients.length();
+    }
+    private String getIngredientListText(IngredientList ingredientList){
+        String list = "";
+        for(int i =0; i<ingredientList.length(); i++){
+            Cursor res = myDb.getIngredient(ingredientList.getIngredientList().get(i).ID);
+            list = list + res.getString(2) +
+                    ":      " +
+                    ingredientList.getIngredientList().get(i).getAmount() +
+                    "  " +
+                    res.getString(4) +
+                    "\n";
+        }
+        return list;
     }
 }

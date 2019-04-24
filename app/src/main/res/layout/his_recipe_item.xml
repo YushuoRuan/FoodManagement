@@ -20,7 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
         android:layout_marginTop="22dp"
-        android:layout_toEndOf="@+id/currRecipeNameTV"
+        android:layout_toEndOf="@+id/hisRecipeNameTV"
         android:text="Cuisine" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="19dp"
         android:layout_marginTop="44dp"
-        android:layout_toEndOf="@+id/currRecipeNameTV"
+        android:layout_toEndOf="@+id/hisRecipeNameTV"
         android:text="Type" />
 
     <TextView
@@ -57,23 +57,31 @@
         android:id="@+id/hisRecipeIngredListTV"
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/currRecipeNameTV"
+        android:layout_below="@+id/hisRecipeNameTV"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="4dp"
         android:text="List of Ingredients" />
 
     <Button
         android:id="@+id/hisRecipeToCurrentBtn"
         android:layout_width="164dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/currRecipeIngredListTV"
+        android:layout_below="@+id/hisRecipeIngredListTV"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="9dp"
         android:backgroundTint="#A6ED92"
         android:text="Add to current"
         android:textSize="12sp" />
+
+    <Space
+        android:layout_width="274dp"
+        android:layout_height="14dp"
+        android:layout_below="@+id/hisRecipeToCurrentBtn"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="5dp" />
 
 </RelativeLayout>
 

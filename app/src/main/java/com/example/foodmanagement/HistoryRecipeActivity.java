@@ -79,21 +79,31 @@ public class HistoryRecipeActivity extends AppCompatActivity {
         });
 
         recipeDB = new DatabaseHelper(this);
-        Cursor res = recipeDB.getAllRecipeData();
-        if (res.getCount() > 0) {
+        Cursor res = recipeDB.getHistRecipeData();
+        if(res.getCount()>0){
             ArrayList<Recipe> recipes = new ArrayList<>();
-            while (res.moveToNext()) {
+            while(res.moveToNext())
+            {
                 Integer id = res.getInt(0);
-                String name = res.getString(1);
-                String cuisine = res.getString(2);
+                String current = res.getString(1);
+                String name = res.getString(2);
                 String type = res.getString(3);
-                String[] IDs = res.getString(4).split(",");
-                String[] amountsS = res.getString(5).split(",");
-                Double[] amounts = new Double[amountsS.length];
-                for (int i = 0; i < amountsS.length; i++) {
+                String cuisine = res.getString(4);
+                String[] IDs = res.getString(5).split(",");
+                String [] Names = res.getString(6).split(",");
+                String[] amountsS = res.getString(7).split(",");
+                Double []amounts = new Double[amountsS.length];
+                if(amountsS[0]=="" || IDs[0]=="")
+                    continue;
+                for(int i = 0; i<amountsS.length; i++)
+                {
+                    if(amountsS[i]==""){
+                        break;}
                     amounts[i] = Double.parseDouble(amountsS[i]);
                 }
-                IngredientList ingList = new IngredientList(IDs, amounts);
+                if(amountsS.length!=IDs.length)
+                    continue;
+                IngredientList ingList = new IngredientList(IDs, Names, amounts);
                 Recipe newRecipe = new Recipe(id, name, cuisine, type, ingList);
                 recipes.add(newRecipe);
             }
