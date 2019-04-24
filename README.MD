@@ -40,7 +40,3 @@ Those who are not good at daily food management can use this system to keep trac
 /iconImage
   Contains icon image file. 
 
-
-
-## Notes on Installing or Executing 
-
