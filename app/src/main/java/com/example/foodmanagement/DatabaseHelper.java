@@ -43,7 +43,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLR_3 = "Type"; //main dish, appetizer
     public static final String COLR_4 = "Cuisine"; //asian, american
     public static final String COLR_5 = "IDs";//"tomato,egg,ketchup"
-    public static final String COLR_6 = "Amounts";//"1, 2, 0.3"
+    public static final String COLR_6 = "Names";//"1, 2, 0.3"
+    public static final String COLR_7 = "Amounts";
 
 
     public DatabaseHelper(Context context) {
@@ -55,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + INVENTORY_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Type Text, Name Text, Amount REAL, Unit TEXT, Storage TEXT, Expire TEXT, Tags TEXT)");
         db.execSQL("create table " + SHOPPING_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Type Text, Name Text, Amount REAL, Unit TEXT, Storage TEXT, Expire TEXT, Tags TEXT)");
-        db.execSQL("create table " + RECIPE_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Current INTEGER, Name TEXT, Type TEXT, Cuisine TEXT, IDs TEXT, Amounts TEXT)");
+        db.execSQL("create table " + RECIPE_TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, Current INTEGER, Name TEXT, Type TEXT, Cuisine TEXT, IDs TEXT, Names TEXT, Amounts TEXT)");
     }
 
     @Override
@@ -95,12 +96,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.moveToNext();
         Double amount = res.getDouble(3);
         amount = amount - num;
-        if(amount<=0)
+        if(amount < 0)
         {
             return false;
         }
         db.execSQL("update "+INVENTORY_TABLE_NAME+" set Amount = " + Double.toString(amount) + " where ID = " + Integer.toString(id));
         return true;
+    }
+
+    public void subtractDataInventoryName (String name, double num) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + INVENTORY_TABLE_NAME + " where Name = '" + name +"'", null);
+        while (res.moveToNext()) {
+            num = num - res.getDouble(3);
+            if (num > 0) {
+                deleteInventoryData(res.getInt(0));
+            } else {
+                db.execSQL("update "+INVENTORY_TABLE_NAME+" set Amount = " + Double.toString(Math.abs(num)) + " where ID = " + res.getInt(0));
+                break;
+            }
+        }
+
     }
 
     public boolean updateExpireInventory(Integer id, Date expireDate) {
@@ -187,6 +203,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COLR_4, recipeInfo.get(3));
         contentValues.put(COLR_5, recipeInfo.get(4));
         contentValues.put(COLR_6, recipeInfo.get(5));
+        contentValues.put(COLR_7, recipeInfo.get(6));
 
         long result = db.insert(RECIPE_TABLE_NAME, null, contentValues);
         if(result == -1)

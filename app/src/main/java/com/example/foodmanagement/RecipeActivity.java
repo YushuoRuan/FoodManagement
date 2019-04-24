@@ -91,7 +91,8 @@ public class RecipeActivity extends AppCompatActivity {
                 String type = res.getString(3);
                 String cuisine = res.getString(4);
                 String[] IDs = res.getString(5).split(",");
-                String[] amountsS = res.getString(6).split(",");
+                String [] Names = res.getString(6).split(",");
+                String[] amountsS = res.getString(7).split(",");
                 Double []amounts = new Double[amountsS.length];
                 if(amountsS[0]=="" || IDs[0]=="")
                     continue;
@@ -103,7 +104,7 @@ public class RecipeActivity extends AppCompatActivity {
                 }
                 if(amountsS.length!=IDs.length)
                     continue;
-                IngredientList ingList = new IngredientList(IDs, amounts);
+                IngredientList ingList = new IngredientList(IDs, Names, amounts);
                 Recipe newRecipe = new Recipe(id, name, cuisine, type, ingList);
                 recipes.add(newRecipe);
             }

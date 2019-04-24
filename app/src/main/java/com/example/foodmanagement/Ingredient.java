@@ -28,9 +28,9 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public Ingredient(int id, String type, double amount) {
+    public Ingredient(int id, String material, double amount) {
         ID = id;
-        this.type = type;
+        this.material = material;
         this.amount = amount;
     }
 

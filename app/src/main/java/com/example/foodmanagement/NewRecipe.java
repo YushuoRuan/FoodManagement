@@ -146,7 +146,7 @@ public class NewRecipe extends AppCompatActivity {
                                  String.valueOf(amountDiff), unitList.get(ingPos), storageList.get(ingPos));
                     }
                     ingList.add(ing);
-                    ingredientText.setText(ingList.getInfo().get(0) + '\n' + ingList.getInfo().get(1));
+                    ingredientText.setText(ingList.showIngredients().get(0) + '\n' + ingList.showIngredients().get(1));
                 }
 
             }

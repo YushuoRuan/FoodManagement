@@ -57,7 +57,7 @@ public class RecipeItemAdapter extends BaseAdapter {
         TextView cuisineTextView = (TextView) v.findViewById(R.id.currRecipeCuisineTV);
         TextView typeTextView = (TextView) v.findViewById(R.id.currRecipeTypeTV);
         TextView availableTV = (TextView) v.findViewById(R.id.currRecipeFracTV);
-        TextView  ingredientListTV = (TextView) v.findViewById(R.id.currRecipeIngredListTV);
+        final TextView  ingredientListTV = (TextView) v.findViewById(R.id.currRecipeIngredListTV);
 
         final Button finishBtn = (Button) v.findViewById(R.id.currRecipeFinishBtn);
         final Button cancelBtn = (Button) v.findViewById(R.id.currRecipeCancelBtn);
@@ -65,9 +65,11 @@ public class RecipeItemAdapter extends BaseAdapter {
         finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i < ingredients.length(); i++) {
-                    myDb.subtractDataInventory(ingredients.getIngredientList().get(i).ID,
-                            ingredients.getIngredientList().get(i).getAmount());
+                finishBtn.setText("finishing...");
+                for (int i = 0; i < ingredients.length(); i++) {
+//                    myDb.subtractDataInventory(ingredients.getIngredientList().get(i).ID,
+//                            ingredients.getIngredientList().get(i).getAmount());
+                    myDb.subtractDataInventoryName(ingredients.getIngredientList().get(i).getMaterial(), ingredients.getIngredientList().get(i).getAmount());
                 }
                 myDb.toHistoryRecipe(recipes.get(position).getID());
                 finishBtn.setText("Enjoy!!");
