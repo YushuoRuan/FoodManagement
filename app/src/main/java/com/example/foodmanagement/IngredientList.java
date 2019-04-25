@@ -1,5 +1,5 @@
 /*
- * ingredient list class (recipe)
+ * ingredient list class (mostly used in recipe)
  * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
  */
 package com.example.foodmanagement;
@@ -8,26 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientList {
+
+    // delegate an array list to maintain the ingredients
     private ArrayList<Ingredient> ingredientList;
 
-    public IngredientList () {
+    // constructors
+    IngredientList() {
         ingredientList = new ArrayList<>();
     }
 
-    public boolean add (Ingredient ing) {
-        ingredientList.add(ing);
-        return true;
-    }
-
-    public IngredientList (String[] IDs, Double[] amounts) {
-        ingredientList = new ArrayList<>();
-        for (int i = 0; i < IDs.length; i++) {
-            Ingredient ing = new Ingredient(Integer.parseInt(IDs[i]), amounts[i]);
-            ingredientList.add(ing);
-        }
-    }
-
-    public IngredientList (String[] IDs, String[] names, Double[] amounts) {
+    IngredientList(String[] IDs, String[] names, Double[] amounts) {
         ingredientList = new ArrayList<>();
         for (int i = 0; i < IDs.length; i++) {
             Ingredient ing = new Ingredient(Integer.parseInt(IDs[i]), names[i], amounts[i]);
@@ -35,19 +25,21 @@ public class IngredientList {
         }
     }
 
+    // methods for maintaining the array list of ingredients
 
-
-    public void show () {
-        for (Ingredient ing :
-                ingredientList) {
-            System.out.print(ing);
-        }
+    // add new ingredient to the list
+    public boolean add (Ingredient ing) {
+        ingredientList.add(ing);
+        return true;
     }
-    public int length() {
+
+    //return the total num of ingredients
+    int length() {
         return ingredientList.size();
     }
 
-    public List<String> showIngredients () {
+    // show the information of ingredients
+    List<String> showIngredients() {
         List<String> info = new ArrayList<>();
         StringBuilder names = new StringBuilder();
         StringBuilder amounts = new StringBuilder();
@@ -61,7 +53,8 @@ public class IngredientList {
         return info;
     }
 
-    public List<String> getInfo () {
+
+    List<String> getInfo() {
         List<String> info = new ArrayList<>();
         StringBuilder IDs = new StringBuilder();
         StringBuilder names = new StringBuilder();
@@ -77,8 +70,9 @@ public class IngredientList {
         info.add(amounts.toString());
         return info;
     }
-    
-    public ArrayList<Ingredient> getIngredientList(){
+
+
+    ArrayList<Ingredient> getIngredientList(){
         return ingredientList;
     }
 }

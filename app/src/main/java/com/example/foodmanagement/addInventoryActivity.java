@@ -109,17 +109,17 @@ public class addInventoryActivity extends AppCompatActivity {
         String storage = storeSpinner.getSelectedItem().toString();
 
 
-        //make sure we have all the information
+        // make sure we have all the information
         if(type==""|| name==""||amount==""||unit==""||storage==""){
             Toast.makeText(addInventoryActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
             return false;
         }
-        //convert date to string and store to database
+        // convert date to string and store to database
         String date2 = "null";
         if(expireDate!=null)
             date2 = (expireDate.getMonth()+1)+"/"+expireDate.getDate()+"/"+(expireDate.getYear()+1900);
         boolean inserted = myDb.insertDataInventory(type, name, amount, unit, storage, date2, "none");
-        //print status
+        // print status
         if(inserted){
             Toast.makeText(addInventoryActivity.this, "Added to inventory", Toast.LENGTH_LONG).show();
             return true;
