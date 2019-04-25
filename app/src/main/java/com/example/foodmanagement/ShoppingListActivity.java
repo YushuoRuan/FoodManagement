@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
-    ListView myListView;
+    ListView myListView; /*list view for ingredients in shoppinglist*/
     String[] names;
     int[] amounts;
     String[] units;
@@ -36,15 +36,15 @@ public class ShoppingListActivity extends AppCompatActivity {
 
 
     private CheckBox checkBox;
-    private int checkedNum =0;
+    private int checkedNum =0;/*initial the checkbox number */
     private TextView nameTV;
     private TextView amountTV;
     private TextView unitTV;
 
-    DatabaseHelper DBhelper;
+    DatabaseHelper DBhelper; /*facade database helper*/
 
 
-
+    //navigating between inventory, shopping list, and recipe pages.
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -66,25 +66,28 @@ public class ShoppingListActivity extends AppCompatActivity {
         }
     };
 
+    //first to run when starting this activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_list);
+        setContentView(R.layout.activity_shopping_list); //address the layout
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setSelectedItemId(R.id.navigation_cart);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        //find and set add add new shoppinglist item button
         Button addShopBtn = (Button) findViewById(R.id.addShoppingBtn);
-
+        //get and enter add shoppinglist item activity.
         addShopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent showAddShopping = new Intent(getApplicationContext(), AddShopingListActivity.class);
+                Intent showAddShopping = new Intent(getApplicationContext(), AddShopingListActivity.class);//indicate the class after click button
                 startActivity(showAddShopping);
             }
         });
 
+        //define the elements
         checkBox = (CheckBox)findViewById(R.id.checkBox);
         nameTV = (TextView) findViewById(R.id.shopDetailNameTV);
         amountTV = (TextView) findViewById(R.id.shopDetailAmountTV);
@@ -94,20 +97,21 @@ public class ShoppingListActivity extends AppCompatActivity {
 
 
 
-
+        /*instantiate database helper*/
         DBhelper = new DatabaseHelper(this);
         // Cursor res = DBhelper.getShoppingData();
         ShoppingCart shoppingCart = new ShoppingCart(DBhelper);
 
-        ArrayList<Ingredient> shoppingIngredients = shoppingCart.getShoppingIngredients();
+        ArrayList<Ingredient> shoppingIngredients = shoppingCart.getShoppingIngredients();//get shopping list items
 
 
 
-
+        //make a judgement of shopping list size
         if(shoppingIngredients.size()>0) {
-            final ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);
+            final ShopItemAdapter shopItemAdapter = new ShopItemAdapter(this, shoppingIngredients);//define related adapter
             myListView.setAdapter(shopItemAdapter);
 
+            //when a item in listview is clicked, checkbox status change
             myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

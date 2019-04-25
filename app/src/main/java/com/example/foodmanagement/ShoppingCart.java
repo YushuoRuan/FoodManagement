@@ -11,14 +11,18 @@ import com.example.foodmanagement.Ingredient;
 import java.util.ArrayList;
 
 public class ShoppingCart {
+    //shopping list contains many ingredients.
     private ArrayList<Ingredient> shoppingList;
 
     public ShoppingCart(DatabaseHelper myDb){
+        //initialize shopping list
         shoppingList = new ArrayList<>();
+
+        //read ingredient data from DB shopping list table.
         Cursor res = myDb.getShoppingData();
         if(res.getCount() > 0)
         {
-            while(res.moveToNext()){
+            while(res.moveToNext()){//get detail information
 
                 Integer ID = res.getInt(0);
                 String type= res.getString(1);
@@ -36,12 +40,15 @@ public class ShoppingCart {
 
     }
 
+    //helper function that stores ingredient in to shopping list arraylist.
     public void shoppingItem(Integer I, String type, String name, double amount, String unit, String storage, String exp, String tags){
+
+        //construct a ingredient object.
         Ingredient newIngredient = new Ingredient(I, type, name, amount, unit, storage);
         shoppingList.add(newIngredient);
 
     }
-
+    //ingredient arraylist getter in shopping list
     public ArrayList<Ingredient> getShoppingIngredients(){
         return shoppingList;
     }
