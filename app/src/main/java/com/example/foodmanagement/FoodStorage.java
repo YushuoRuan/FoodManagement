@@ -45,12 +45,12 @@ public class FoodStorage {
         Ingredient newIngredient = new Ingredient(I, type, name, amount, unit, storage);
 
         //check expire date
-        if(exp!="null"){
+        if(!exp.equals("null")){
             newIngredient.setExpiredDate(exp);
         }
         String[] tagArray = tags.split(",");
-        for(int i = 0; i < tagArray.length; i++){
-            newIngredient.addTag(tagArray[i]);
+        for (String aTagArray : tagArray) {
+            newIngredient.addTag(aTagArray);
         }
 
         storedIngredientList.add(newIngredient);

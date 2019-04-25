@@ -93,7 +93,7 @@ public class AddShopingListActivity extends AppCompatActivity {
         String storage = storeSpinner.getSelectedItem().toString();
 
         //make sure we have all the information
-        if(type==""|| name==""||amount==""||unit==""||storage==""){
+        if(type.equals("") || name.equals("") || amount.equals("") || unit.equals("") || storage.equals("")){
             Toast.makeText(AddShopingListActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
             return false;
         }

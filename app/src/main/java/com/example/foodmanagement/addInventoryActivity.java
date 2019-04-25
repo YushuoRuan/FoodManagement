@@ -110,7 +110,7 @@ public class addInventoryActivity extends AppCompatActivity {
 
 
         // make sure we have all the information
-        if(type==""|| name==""||amount==""||unit==""||storage==""){
+        if(type.equals("") || name.equals("") || amount.equals("") || unit.equals("") || storage.equals("")){
             Toast.makeText(addInventoryActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
             return false;
         }
