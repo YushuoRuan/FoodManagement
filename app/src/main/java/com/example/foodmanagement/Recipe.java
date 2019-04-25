@@ -62,6 +62,7 @@ public class Recipe {
         return current;
     }
 
+    // show the information of recipe
     List<String> getInfo () {
         List<String> info = new ArrayList<>();
         info.add(Integer.toString(current));
