@@ -1,3 +1,7 @@
+/*
+ * Shopping cart class.
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 import android.database.Cursor;
 

@@ -1,3 +1,7 @@
+/*
+ * Shopping list activity (Launcher activity) source code.
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.content.Intent;

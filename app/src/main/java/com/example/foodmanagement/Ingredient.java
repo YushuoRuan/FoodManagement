@@ -1,3 +1,8 @@
+/*
+ * ingredient class.
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
+
 package com.example.foodmanagement;
 
 import java.util.ArrayList;
@@ -6,14 +11,14 @@ public class Ingredient {
 
     public int ID;
     private String type;
-    private String material;
+    private String material; //ingredient name
     private double amount;
     private String unit;
-    private String storage;
+    private String storage; //where to store
     private String expiredDate;
     private ArrayList<String> tags = new ArrayList<>();
 
-    //init
+    //constructors
     public Ingredient(int I, String t, String m, double a, String u, String s){
         ID=I;
         type = t;

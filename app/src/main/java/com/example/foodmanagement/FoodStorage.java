@@ -6,10 +6,7 @@ package com.example.foodmanagement;
 
 import android.database.Cursor;
 
-import com.example.foodmanagement.Ingredient;
-
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FoodStorage {
 

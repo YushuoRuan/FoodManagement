@@ -1,5 +1,10 @@
-package com.example.foodmanagement;
+/*
+ * ingredient class.
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 
+
+package com.example.foodmanagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +19,7 @@ public class Recipe {
 
     private IngredientList ingList;
 
+    //constructors
     public Recipe(Integer id, String n, String t, String c, IngredientList ingList){
         current = 1;
         ID = id;
@@ -31,6 +37,7 @@ public class Recipe {
 
     }
 
+    //getter functions
     public Integer getID() {
         return ID;
     }
@@ -47,21 +54,12 @@ public class Recipe {
         return cuisine;
     }
 
-
     public IngredientList getIngList() {
         return ingList;
     }
 
-    public void setIngList(IngredientList ingList) {
-        this.ingList = ingList;
-    }
-
     public int isCurrent() {
         return current;
-    }
-
-    public void setCurrent(int current) {
-        this.current = current;
     }
 
     List<String> getInfo () {
@@ -73,4 +71,15 @@ public class Recipe {
         info.addAll(ingList.getInfo());
         return info;
     }
+
+    //setter functions
+    public void setIngList(IngredientList ingList) {
+        this.ingList = ingList;
+    }
+
+    public void setCurrent(int current) {
+        this.current = current;
+    }
+
+
 }

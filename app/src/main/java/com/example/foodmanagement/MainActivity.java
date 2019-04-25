@@ -1,8 +1,10 @@
+/*
+ * Inventory activity (Launcher activity) source code.
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,14 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
-    ListView myListView;
+    ListView myListView; /*list view for ingredients in inventory*/
 
     ArrayList<Ingredient> ingredients;
 
-    ArrayList<Ingredient> ingredientsTBD;
+    ArrayList<Ingredient> ingredientsTBD; /*ingredients to be displayed*/
 
-    public DatabaseHelper myDb;
+    public DatabaseHelper myDb; /*facade database helper*/
 
+    //set bottom navigation view functionality.
+    //navigating between inventory, shopping list, and recipe pages.
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //top navigation that chose categories to display in the list view.
     private BottomNavigationView.OnNavigationItemSelectedListener tOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -75,41 +80,40 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    //first to run when starting this activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myDb = new DatabaseHelper(this);
-        FoodStorage foodStorage = new FoodStorage(myDb);
+        myDb = new DatabaseHelper(this); /*instantiate database helper*/
+        FoodStorage foodStorage = new FoodStorage(myDb); /*construct food storage with ingredients in database*/
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //set up bottom navigator
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-//        Resources res = getResources();
-//        names = res.getStringArray(R.array.Names);
-//        amounts = res.getIntArray(R.array.Amount);
-//        units = res.getStringArray(R.array.Units);
-//        descriptions = res.getStringArray(R.array.Dates);
-//        storages = res.getStringArray(R.array.Storages);
+        ingredients = foodStorage.getIngredients(); /*get ingredients from food storage*/
+        mTextMessage = (TextView) findViewById(R.id.message);
 
-        ingredients = foodStorage.getIngredients();
-
+        //inflate listview with adapter.
         myListView = (ListView) findViewById(R.id.invenListView);
         if(ingredients.size()>0) {
             ItemAdapter itemAdapter = new ItemAdapter(this, ingredients);
             myListView.setAdapter(itemAdapter);
         }
 //
+        //when a item in listview is clicked, go to edit page
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //get activity
                 Intent showFoodEdit = new Intent(getApplicationContext(), FoodEdit.class);
+                //pass information to next activity.
                 showFoodEdit.putExtra("position", position);
                 showFoodEdit.putExtra("ID", ingredients.get(position).ID);
 
-
+                //process date and pass to next activity.
                 String dateS = ingredients.get(position).getExpiredDate();
                 Date date1 = null;
                 try {
@@ -120,16 +124,17 @@ public class MainActivity extends AppCompatActivity {
                     Date today = Calendar.getInstance().getTime();
                     showFoodEdit.putExtra("expireDate", today.getTime());
                 }
-
+                //go to food edit activity.
                 startActivity(showFoodEdit);
             }
         });
 
+        //find and set add button in inventory page.
         Button addInBtn = (Button) findViewById(R.id.addInventoryBtn);
-
         addInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //get and enter add ingredient activity.
                 Intent showAddInventory = new Intent(getApplicationContext(), addInventoryActivity.class);
                 startActivity(showAddInventory);
             }

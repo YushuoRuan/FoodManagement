@@ -1,3 +1,7 @@
+/*
+ * ingredient list class (recipe)
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import java.util.ArrayList;

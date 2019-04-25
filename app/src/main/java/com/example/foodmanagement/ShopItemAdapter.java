@@ -1,32 +1,27 @@
+/*
+ * ItemAdapter class for shopping list list view
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import android.util.Log;
-
 
 
 public class ShopItemAdapter extends BaseAdapter {
 
-    LayoutInflater shopInflater;
+    LayoutInflater shopInflater; /*declare inflater for list view. */
     ArrayList<Ingredient> ingredients;
-
-    DatabaseHelper myDb;
-
+    DatabaseHelper myDb;/*declare database helper to accesses data in inventory table*/
     private static HashMap<Integer,Boolean> checked=null;
 
     public HashMap<Integer, Boolean> getChecked() {
@@ -96,9 +91,6 @@ public class ShopItemAdapter extends BaseAdapter {
                 //delete shopping item from shopping list and database
                 deleteBtn.setText("Deleted!");
                 myDb.deleteShoppingData(ingredients.get(position).ID);
-
-
-
             }
         });
 

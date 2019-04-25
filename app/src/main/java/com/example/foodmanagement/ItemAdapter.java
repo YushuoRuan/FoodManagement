@@ -1,7 +1,10 @@
+/*
+ * ItemAdapter class for list view
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +19,14 @@ public class ItemAdapter extends BaseAdapter {
 
     LayoutInflater mInflater;
 
+    //avariables that can be accessed from all functions.
     String[] names;
     String[] amounts;
     String[] expires;
     String[] storages;
     String[] units;
 
+    //put ingredient information into arrays.
     public ItemAdapter(Context c, ArrayList<Ingredient> ingredients){
         names = new String[ingredients.size()];
         amounts = new String[ingredients.size()];
@@ -35,6 +40,7 @@ public class ItemAdapter extends BaseAdapter {
             storages[i] = ingredients.get(i).getStorage();
             units[i] = ingredients.get(i).getUnit();
         }
+        //initialize inflater
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -56,7 +62,10 @@ public class ItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //initialize listview with inflater.
         View v = mInflater.inflate(R.layout.inventory_item_detail,null);
+
+        //get TextViews from layout
         TextView nameTextView = (TextView) v.findViewById(R.id.nameTV);
         TextView amountTextView = (TextView) v.findViewById(R.id.amountTV);
         TextView descriptionTextView = (TextView) v.findViewById(R.id.descriptionTV);
@@ -64,13 +73,14 @@ public class ItemAdapter extends BaseAdapter {
         ImageView foodTypeImg = (ImageView) v.findViewById(R.id.foodTypeImg);
 
         //foodTypeImg.setImageResource(R.mipmap.meatIm);
-
+        //extract information at position
         String name = names[position];
         String amount =amounts[position];
         String expire = expires[position];
         String storage = storages[position];
         String unit = units[position];
 
+        //display information in the TextViews
         DecimalFormat df = new DecimalFormat("#.##");
         nameTextView.setText(name);
         amountTextView.setText(df.format(Double.parseDouble(amount)) + " " + unit);
