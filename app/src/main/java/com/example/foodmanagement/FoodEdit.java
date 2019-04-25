@@ -1,9 +1,12 @@
+/*
+ * source code of Edit food page activity in inventory page
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,59 +15,53 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.Date;
-
-import static com.example.foodmanagement.DatabaseHelper.INVENTORY_TABLE_NAME;
 
 public class FoodEdit extends AppCompatActivity {
 
-    DatabaseHelper tmpDB;
-    EditText subtractAmountET;
-    int ID;
-    Date expireDate;
+    DatabaseHelper tmpDB; /*facade database helper*/
+    EditText subtractAmountET; /*subtract amount edit text*/
+    int ID; /*FoodEdit on Item with ID*/
+    Date expireDate;/*subtract amount edit text*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_edit);
 
+        //get the information from last activity.
         Intent in = getIntent();
         int index = in.getIntExtra("position", -1);
         ID = in.getIntExtra("ID", -1);
         long currExpire = in.getLongExtra("expireDate",0);
 
-
+        //instantiate database helper
         tmpDB = new DatabaseHelper(this);
+
+        //get ingredient data with ID, extract needed information.
         Cursor res = tmpDB.getIngredient(ID);
-
-//        Resources res = getResources();
-//        String[] names = res.getStringArray(R.array.Names);
-//        String[] units = res.getStringArray(R.array.Units);
-//        String[] storages = res.getStringArray(R.array.Storages);
-
         String name = res.getString(2);
         String unit = res.getString(4);
         String storage = res.getString(5);
 
+        //get the textviews in layout and display information
         TextView idTV = (TextView) findViewById(R.id.editIDTV);
         idTV.setText(Integer.toString(ID));
-
         TextView nameTV = (TextView) findViewById(R.id.editNameTV);
         nameTV.setText(name);
-
         TextView unitTV = (TextView) findViewById(R.id.editUnitTV);
         unitTV.setText(unit);
-
         TextView storageTV = (TextView) findViewById(R.id.editStorageTV);
         storageTV.setText(storage);
 
+
         subtractAmountET = (EditText) findViewById(R.id.subtractAmountET);
 
+        //find buttons in layout
         Button subtractBtn = (Button) findViewById(R.id.subtractButton);
         Button deleteBtn = (Button) findViewById(R.id.deleteButton);
 
+        //set event when click on subtract button
         subtractBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +69,7 @@ public class FoodEdit extends AppCompatActivity {
                 Double outAmount = Double.parseDouble(subtractAmountET.getText().toString());
                 boolean subtracted = tmpDB.subtractDataInventory(ID, outAmount);
                 if(subtracted){
+                    //jump back to inventory activity.
                     Toast.makeText(FoodEdit.this, "Subtracted from Inventory", Toast.LENGTH_LONG).show();
                     finish();
                     Intent showInventory = new Intent(getApplicationContext(), MainActivity.class);
@@ -83,11 +81,13 @@ public class FoodEdit extends AppCompatActivity {
             }
         });
 
+        //set event when click on delete button
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Integer deleted = tmpDB.deleteInventoryData(ID);
                 if(deleted>0){
+                    //show message and jump back to inventory activity.
                     Toast.makeText(FoodEdit.this, "Deleted from Inventory", Toast.LENGTH_LONG).show();
                     finish();
                     Intent showInventory = new Intent(getApplicationContext(), MainActivity.class);
@@ -99,10 +99,11 @@ public class FoodEdit extends AppCompatActivity {
             }
         });
 
+        //change expire date functionality
+        //store date chosen by user
         CalendarView expireCV = (CalendarView) findViewById(R.id.editExpireCV);
         expireCV.setDate(currExpire);
         Button updateExpireBtn = (Button) findViewById(R.id.updateExpireBtn);
-
         expireDate = null;
         expireCV.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -111,6 +112,7 @@ public class FoodEdit extends AppCompatActivity {
             }
         });
 
+        //update expire date and return to inventory activity when user click update button
         updateExpireBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

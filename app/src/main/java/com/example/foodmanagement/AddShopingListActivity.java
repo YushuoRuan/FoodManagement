@@ -1,3 +1,8 @@
+/*
+ * Source code for the "add new ingredient to shopping list" page
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
+
 package com.example.foodmanagement;
 
 import android.content.Intent;
@@ -6,36 +11,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.Date;
 
 public class AddShopingListActivity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
+    DatabaseHelper myDb; /*facade database helper*/
 
+    //Spinners in the layout
     Spinner typeSpinner;
     Spinner unitSpinner;
     Spinner storeSpinner;
     Spinner tagSpinner;
 
+    //Edit Texts in the layout, will be used in inner classes
     EditText addNameET;
     EditText addAmountET;
     EditText addTagET;
 
-
-
-
+    //trigger onCreate function when starting this activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shoping_list);
 
-        myDb = new DatabaseHelper(this);
+        myDb = new DatabaseHelper(this);/*instanciate Database Helper*/
 
+        //Set candidate values to spinners
         typeSpinner = (Spinner) findViewById(R.id.shopTypeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.FoodCategories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -56,10 +60,12 @@ public class AddShopingListActivity extends AppCompatActivity {
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tagSpinner.setAdapter(adapter4);
 
+        //Get Edit Texts from layout.
         addNameET = (EditText) findViewById(R.id.shopNameET);
         addAmountET = (EditText) findViewById(R.id.shopAmountET);
         addTagET = (EditText) findViewById(R.id.shopTagET);
 
+        //set event when the "add to inventory" button is clicked
         Button finalAdd = (Button) findViewById(R.id.shopFinalAddBtn);
         finalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +82,9 @@ public class AddShopingListActivity extends AppCompatActivity {
 
     }
 
+    /*
+     * take values from the Spinner and EditText and put then into database.
+     */
     private boolean addToShopping(){
         String type = typeSpinner.getSelectedItem().toString();
         String name = addNameET.getText().toString();
@@ -83,13 +92,13 @@ public class AddShopingListActivity extends AppCompatActivity {
         String unit = unitSpinner.getSelectedItem().toString();
         String storage = storeSpinner.getSelectedItem().toString();
 
-
+        //make sure we have all the information
         if(type==""|| name==""||amount==""||unit==""||storage==""){
             Toast.makeText(AddShopingListActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
             return false;
         }
 
-
+        //print status
         boolean inserted = myDb.insertDataShopping(type, name, amount, unit, storage);
         if(inserted){
             Toast.makeText(AddShopingListActivity.this, "Added to Shopping List", Toast.LENGTH_LONG).show();

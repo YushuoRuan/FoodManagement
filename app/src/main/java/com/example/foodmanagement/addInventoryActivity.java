@@ -1,52 +1,50 @@
+/*
+ * Source code for the "add new ingredient to inventory" page
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.media.MediaPlayer;
-import android.support.annotation.ArrayRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.Date;
 
 public class addInventoryActivity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
+    DatabaseHelper myDb; /*facade database helper*/
 
+    //Spinners in the layout
     Spinner typeSpinner;
     Spinner unitSpinner;
     Spinner storeSpinner;
     Spinner tagSpinner;
 
+    //Edit Texts in the layout, will be used in inner classes
     EditText addNameET;
     EditText addAmountET;
     EditText addTagET;
 
+
     CalendarView expireCalender;
     Date expireDate;
 
-    String[] tags;
-
-
     @Override
+    //trigger onCreate function when starting this activity.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_inventory);
 
-//        Resources res = getResources();
-//        foodCategories = res.getStringArray(R.array.FoodCategories);
-        myDb = new DatabaseHelper(this);
+        myDb = new DatabaseHelper(this); /*instanciate Database Helper*/
+
+        //Set candidate values to spinners
         typeSpinner = (Spinner) findViewById(R.id.foodTypeSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.FoodCategories, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -62,23 +60,22 @@ public class addInventoryActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         storeSpinner.setAdapter(adapter3);
 
-        String[] a;
-
-
         tagSpinner = (Spinner) findViewById(R.id.addTagSpinner);
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this, R.array.Tags, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tagSpinner.setAdapter(adapter4);
 
 
+        //Get other layout items.
         addNameET = (EditText) findViewById(R.id.addNameET);
         addAmountET = (EditText) findViewById(R.id.addAmountET);
         addTagET = (EditText) findViewById(R.id.addTagET);
         expireCalender = (CalendarView) findViewById(R.id.expireCV);
 
         //expireDate = new Date(expireCalender.getDate());
-        expireDate = null;
+        expireDate = null; /*initialize expire date to null*/
 
+        //set expire date when choose date
         expireCalender.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -86,6 +83,7 @@ public class addInventoryActivity extends AppCompatActivity {
             }
         });
 
+        //set event when the "add to inventory" button is clicked
         Button finalAdd = (Button) findViewById(R.id.finalAddInventoryBtn);
         finalAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,16 +97,10 @@ public class addInventoryActivity extends AppCompatActivity {
             }
         });
 
-
-//        tagSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
-
     }
-
+    /*
+     * take values from the Spinner and EditText and put then into database.
+     */
     private boolean addToInventory(){
         String type = typeSpinner.getSelectedItem().toString();
         String name = addNameET.getText().toString();
@@ -117,15 +109,17 @@ public class addInventoryActivity extends AppCompatActivity {
         String storage = storeSpinner.getSelectedItem().toString();
 
 
-
+        //make sure we have all the information
         if(type==""|| name==""||amount==""||unit==""||storage==""){
             Toast.makeText(addInventoryActivity.this, "More Info Required", Toast.LENGTH_LONG).show();
             return false;
         }
+        //convert date to string and store to database
         String date2 = "null";
         if(expireDate!=null)
             date2 = (expireDate.getMonth()+1)+"/"+expireDate.getDate()+"/"+(expireDate.getYear()+1900);
         boolean inserted = myDb.insertDataInventory(type, name, amount, unit, storage, date2, "none");
+        //print status
         if(inserted){
             Toast.makeText(addInventoryActivity.this, "Added to inventory", Toast.LENGTH_LONG).show();
             return true;

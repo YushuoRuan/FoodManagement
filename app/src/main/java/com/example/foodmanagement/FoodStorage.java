@@ -1,3 +1,7 @@
+/*
+ * Food storage class.
+ * Authors: Ziying Zhang, Tianshu Pang, Peng Yan, Yushuo Ruan
+ */
 package com.example.foodmanagement;
 
 import android.database.Cursor;
@@ -9,6 +13,7 @@ import java.util.Date;
 
 public class FoodStorage {
 
+    //food storage contains many ingredients.
     private ArrayList<Ingredient> storedIngredientList;
 
     public FoodStorage(DatabaseHelper myDb){
@@ -36,9 +41,13 @@ public class FoodStorage {
 
     }
 
+    //helper function that stores ingredient in to food storage arraylist.
     public void storeIngredient(Integer I, String type, String name, double amount, String unit, String storage, String exp, String tags){
+
+        //construct a ingredient object.
         Ingredient newIngredient = new Ingredient(I, type, name, amount, unit, storage);
 
+        //check expire date
         if(exp!="null"){
             newIngredient.setExpiredDate(exp);
         }
@@ -51,6 +60,7 @@ public class FoodStorage {
 
     }
 
+    //ingredient arraylist getter.
     public ArrayList<Ingredient> getIngredients(){
         return storedIngredientList;
     }
