@@ -27,7 +27,7 @@ public class ItemAdapter extends BaseAdapter {
     String[] units;
 
     //put ingredient information into arrays.
-    public ItemAdapter(Context c, ArrayList<Ingredient> ingredients){
+    public ItemAdapter(Context c, IngredientList ingredients){
         names = new String[ingredients.size()];
         amounts = new String[ingredients.size()];
         expires = new String[ingredients.size()];

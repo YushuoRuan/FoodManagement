@@ -11,10 +11,11 @@ import java.util.ArrayList;
 public class FoodStorage {
 
     //food storage contains many ingredients.
-    private ArrayList<Ingredient> storedIngredientList;
+    IngredientList storedIngredientList;
+//    private ArrayList<Ingredient> storedIngredientList;
 
     public FoodStorage(DatabaseHelper myDb){
-        storedIngredientList = new ArrayList<>();
+        storedIngredientList = new IngredientList();
         //initialize FoodStorage
         //read ingredient data from either database or csv.
         Cursor res = myDb.getInventoryData();
@@ -58,7 +59,7 @@ public class FoodStorage {
     }
 
     //ingredient arraylist getter.
-    public ArrayList<Ingredient> getIngredients(){
+    public IngredientList getIngredients(){
         return storedIngredientList;
     }
 

@@ -11,6 +11,7 @@ public class IngredientList {
 
     // delegate an array list to maintain the ingredients
     private ArrayList<Ingredient> ingredientList;
+//    private Storage storageType;
 
     // constructors
     IngredientList() {
@@ -31,6 +32,10 @@ public class IngredientList {
     public boolean add (Ingredient ing) {
         ingredientList.add(ing);
         return true;
+    }
+
+    public Ingredient get (int i) {
+        return ingredientList.get(i);
     }
 
     //return the total num of ingredients
@@ -74,5 +79,24 @@ public class IngredientList {
 
     ArrayList<Ingredient> getIngredientList(){
         return ingredientList;
+    }
+
+    int size() {
+        return ingredientList.size();
+    }
+
+    public IngredientList subListStorage(String storage) {
+        if (storage.equals("All")) {
+            return this;
+        } else {IngredientList subList = new IngredientList();
+            for (Ingredient ing :
+                    ingredientList) {
+                if (ing.getStorage().equals(storage)) {
+                    subList.add(ing);
+                }
+            }
+            return subList;
+        }
+
     }
 }

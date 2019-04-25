@@ -27,9 +27,11 @@ public class MainActivity extends AppCompatActivity {
 
     ListView myListView; /*list view for ingredients in inventory*/
 
-    ArrayList<Ingredient> ingredients;
+//    ArrayList<Ingredient> ingredients;
+    IngredientList ingredients;
+    IngredientList ingredientsTBD;
 
-    ArrayList<Ingredient> ingredientsTBD; /*ingredients to be displayed*/
+//    ArrayList<Ingredient> ingredientsTBD; /*ingredients to be displayed*/
 
     public DatabaseHelper myDb; /*facade database helper*/
 
@@ -64,15 +66,21 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_all:
-                    ingredientsTBD = ingredients;
+                    ingredientsTBD = ingredients.subListStorage("All");
+                    showInventory(ingredientsTBD);
                     return true;
                 case R.id.navigation_fridge:
-                    ingredientsTBD = ingredients;
+                    ingredientsTBD = ingredients.subListStorage("Fridge");
+                    showInventory(ingredientsTBD);
                     return true;
                 case R.id.navigation_frozen:
+                    ingredientsTBD = ingredients.subListStorage("Frozen");
+                    showInventory(ingredientsTBD);
                     //display frozen inventory
                     return true;
                 case R.id.navigation_room:
+                    ingredientsTBD = ingredients.subListStorage("Room");
+                    showInventory(ingredientsTBD);
                     //display room temperature inventory
                     return true;
             }
@@ -93,15 +101,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        BottomNavigationView topNavigation = (BottomNavigationView) findViewById(R.id.top_navigation);
+        topNavigation.setOnNavigationItemSelectedListener(tOnNavigationItemSelectedListener);
+
         ingredients = foodStorage.getIngredients(); /*get ingredients from food storage*/
         mTextMessage = (TextView) findViewById(R.id.message);
 
         //inflate listview with adapter.
         myListView = (ListView) findViewById(R.id.invenListView);
-        if(ingredients.size()>0) {
-            ItemAdapter itemAdapter = new ItemAdapter(this, ingredients);
-            myListView.setAdapter(itemAdapter);
-        }
+        ingredientsTBD = ingredients.subListStorage("All");
+        showInventory(ingredientsTBD);
 //
         //when a item in listview is clicked, go to edit page
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,10 +120,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent showFoodEdit = new Intent(getApplicationContext(), FoodEdit.class);
                 //pass information to next activity.
                 showFoodEdit.putExtra("position", position);
-                showFoodEdit.putExtra("ID", ingredients.get(position).ID);
+                showFoodEdit.putExtra("ID", ingredientsTBD.get(position).ID);
 
                 //process date and pass to next activity.
-                String dateS = ingredients.get(position).getExpiredDate();
+                String dateS = ingredientsTBD.get(position).getExpiredDate();
                 Date date1 = null;
                 try {
                     date1 = new SimpleDateFormat("MM/dd/yyyy").parse(dateS);
@@ -143,6 +152,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void showInventory(IngredientList ingredients) {
+        if(ingredients.size() >= 0) {
+            ItemAdapter itemAdapter = new ItemAdapter(this, ingredients);
+            myListView.setAdapter(itemAdapter);
+        }
+
+    }
 
 
 }
