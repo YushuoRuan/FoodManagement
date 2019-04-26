@@ -102,7 +102,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         // Cursor res = DBhelper.getShoppingData();
         ShoppingCart shoppingCart = new ShoppingCart(DBhelper);
 
-        ArrayList<Ingredient> shoppingIngredients = shoppingCart.getShoppingIngredients();//get shopping list items
+        IngredientList shoppingIngredients = shoppingCart.getShoppingIngredients();//get shopping list items
 
 
 

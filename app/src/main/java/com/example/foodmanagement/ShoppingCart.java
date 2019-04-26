@@ -12,11 +12,11 @@ import java.util.ArrayList;
 
 public class ShoppingCart {
     //shopping list contains many ingredients.
-    private ArrayList<Ingredient> shoppingList;
+    private IngredientList shoppingList;
 
     public ShoppingCart(DatabaseHelper myDb){
         //initialize shopping list
-        shoppingList = new ArrayList<>();
+        shoppingList = new IngredientList();
 
         //read ingredient data from DB shopping list table.
         Cursor res = myDb.getShoppingData();
@@ -49,7 +49,7 @@ public class ShoppingCart {
 
     }
     //ingredient arraylist getter in shopping list
-    public ArrayList<Ingredient> getShoppingIngredients(){
+    public IngredientList getShoppingIngredients(){
         return shoppingList;
     }
 

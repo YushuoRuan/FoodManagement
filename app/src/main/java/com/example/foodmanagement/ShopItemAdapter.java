@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class ShopItemAdapter extends BaseAdapter {
 
     LayoutInflater shopInflater; /*declare inflater for list view. */
-    ArrayList<Ingredient> ingredients;
+    IngredientList ingredients;
     DatabaseHelper myDb;/*declare database helper to accesses data in inventory table*/
 
     //initial the checkbox status
@@ -34,7 +34,7 @@ public class ShopItemAdapter extends BaseAdapter {
     }
 
 
-    public ShopItemAdapter(Context c, ArrayList<Ingredient> i){
+    public ShopItemAdapter(Context c, IngredientList i){
 
         shopInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);//initialize inflater
         ingredients = i;
