@@ -75,8 +75,8 @@ public class RecipeItemAdapter extends BaseAdapter {
                 finishBtn.setText("finishing...");
                 for (int i = 0; i < ingredients.length(); i++) {
                     // when finish button is clicked, subtract ingredients from inventory table base on name.
-                    myDb.subtractDataInventoryName(ingredients.getIngredientList().get(i).getMaterial(),
-                            ingredients.getIngredientList().get(i).getAmount());
+                    myDb.subtractDataInventoryName(ingredients.get(i).getMaterial(),
+                            ingredients.get(i).getAmount());
                 }
                 myDb.toHistoryRecipe(recipes.get(position).getID()); /*set */
                 finishBtn.setText("Enjoy!!");
@@ -112,10 +112,10 @@ public class RecipeItemAdapter extends BaseAdapter {
     private String getIngredientListText(IngredientList ingredientList){
         String list = "";
         for(int i =0; i<ingredientList.length(); i++){
-            Cursor res = myDb.getIngredient(ingredientList.getIngredientList().get(i).ID);
+            Cursor res = myDb.getIngredient(ingredientList.get(i).ID);
             list = list + res.getString(2) +
                     ":      " +
-                    ingredientList.getIngredientList().get(i).getAmount() +
+                    ingredientList.get(i).getAmount() +
                     "  " +
                     res.getString(4) +
                     "\n";

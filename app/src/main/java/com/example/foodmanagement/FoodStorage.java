@@ -12,7 +12,6 @@ public class FoodStorage {
 
     //food storage contains many ingredients.
     IngredientList storedIngredientList;
-//    private ArrayList<Ingredient> storedIngredientList;
 
     public FoodStorage(DatabaseHelper myDb){
         storedIngredientList = new IngredientList();

@@ -106,10 +106,10 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
     private String getIngredientListText(IngredientList ingredientList){
         String list = "";
         for(int i =0; i<ingredientList.length(); i++){
-            Cursor res = myDb.getIngredient(ingredientList.getIngredientList().get(i).ID);
+            Cursor res = myDb.getIngredient(ingredientList.get(i).ID);
             list = list + res.getString(2) +
                     ":      " +
-                    ingredientList.getIngredientList().get(i).getAmount() +
+                    ingredientList.get(i).getAmount() +
                     "  " +
                     res.getString(4) +
                     "\n";

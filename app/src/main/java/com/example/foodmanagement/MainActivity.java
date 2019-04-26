@@ -27,11 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     ListView myListView; /*list view for ingredients in inventory*/
 
-//    ArrayList<Ingredient> ingredients;
     IngredientList ingredients;
     IngredientList ingredientsTBD;
-
-//    ArrayList<Ingredient> ingredientsTBD; /*ingredients to be displayed*/
 
     public DatabaseHelper myDb; /*facade database helper*/
 

@@ -101,12 +101,12 @@ public class RecipeActivity extends AppCompatActivity {
                 String a = res.getString(7);
                 String[] amountsS = res.getString(7).split(",");
                 Double []amounts = new Double[amountsS.length];
-                if(amountsS[0]=="" || IDs[0]=="")
+                if(amountsS[0].equals("") || IDs[0].equals(""))
                     continue;
                 //convert string array to double array
                 for(int i = 0; i<amountsS.length; i++)
                 {
-                    if(amountsS[i]==""){
+                    if(amountsS[i].equals("")){
                         break;}
                     amounts[i] = Double.parseDouble(amountsS[i]);
                 }
