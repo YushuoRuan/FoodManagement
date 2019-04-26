@@ -98,6 +98,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public Double getIngredientAmountOnName(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select Amount from "+INVENTORY_TABLE_NAME + " where Name = '" + name + "'", null);
+        Double amount = 0.0;
+        while(res.moveToNext()){
+            amount = amount + res.getDouble(0);
+        }
+        return amount;
+    }
+
     //subtract ingredient amount when user modify amount in food edit page
     public boolean subtractDataInventory(Integer id, Double num){
         SQLiteDatabase db = this.getWritableDatabase();

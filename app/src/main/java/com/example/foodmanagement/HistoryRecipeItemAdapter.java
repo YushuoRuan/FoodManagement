@@ -91,22 +91,32 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
         nameTextView.setText(recipes.get(position).getName());
         cuisineTextView.setText(recipes.get(position).getCuisine());
         typeTextView.setText(recipes.get(position).getType());
-        availableTV.setText(getIngredientFraction(position));
+        availableTV.setText(getIngredientFraction());
         ingredientListTV.setText(getIngredientListText(ingredients));
 
         return v;
     }
     //get fraction of available ingredients.
-    private String getIngredientFraction(int position){
-
-
-        return "0/"+ingredients.length();
+    private String getIngredientFraction(){
+        int counter = 0;
+        for(int i = 0; i < ingredients.length(); i++)
+        {
+            Double amountInStore = myDb.getIngredientAmountOnName(ingredients.get(i).getMaterial());
+            if(amountInStore>=ingredients.get(i).getAmount())
+            {
+                counter++;
+            }
+        }
+        return Integer.toString(counter) + "/" + ingredients.length();
     }
     //change ingredient array list to displayable string
     private String getIngredientListText(IngredientList ingredientList){
         String list = "";
         for(int i =0; i<ingredientList.length(); i++){
             Cursor res = myDb.getIngredient(ingredientList.get(i).ID);
+            if(myDb.getIngredientAmountOnName(ingredientList.get(i).getMaterial())<ingredientList.get(i).getAmount()){
+                list = list + "*";
+            }
             list = list + res.getString(2) +
                     ":      " +
                     ingredientList.get(i).getAmount() +

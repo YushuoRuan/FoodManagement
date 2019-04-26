@@ -105,7 +105,16 @@ public class RecipeItemAdapter extends BaseAdapter {
 
     //get fraction of available ingredients.
     private String getIngredientFraction(){
-        return "0/"+ingredients.length();
+        int counter = 0;
+        for(int i = 0; i < ingredients.length(); i++)
+        {
+            Double amountInStore = myDb.getIngredientAmountOnName(ingredients.get(i).getMaterial());
+            if(amountInStore>=ingredients.get(i).getAmount())
+            {
+                counter++;
+            }
+        }
+        return Integer.toString(counter) + "/" + ingredients.length();
     }
 
     //change ingredient array list to displayable string
@@ -113,6 +122,9 @@ public class RecipeItemAdapter extends BaseAdapter {
         String list = "";
         for(int i =0; i<ingredientList.length(); i++){
             Cursor res = myDb.getIngredient(ingredientList.get(i).ID);
+            if(myDb.getIngredientAmountOnName(ingredientList.get(i).getMaterial())<ingredientList.get(i).getAmount()){
+                list = list + "*";
+            }
             list = list + res.getString(2) +
                     ":      " +
                     ingredientList.get(i).getAmount() +
