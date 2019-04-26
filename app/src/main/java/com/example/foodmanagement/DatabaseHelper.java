@@ -106,12 +106,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.moveToNext();
         Double amount = res.getDouble(3);
         amount = amount - num;
-        if(amount < 0)
-        {
+        if(amount < 0) {
             return false;
         }
-        db.execSQL("update "+INVENTORY_TABLE_NAME+" set Amount = " + Double.toString(amount) + " where ID = " + Integer.toString(id));
-        return true;
+        else if(amount == 0) {
+            deleteInventoryData(id);
+            return true;
+        }
+        else {
+            db.execSQL("update " + INVENTORY_TABLE_NAME + " set Amount = " + Double.toString(amount) + " where ID = " + Integer.toString(id));
+            return true;
+        }
     }
 
     //subtract ingredient amount base on name, used when finish a recipe
