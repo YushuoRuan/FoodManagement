@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Date;
@@ -34,6 +35,7 @@ public class FoodEdit extends AppCompatActivity {
         int index = in.getIntExtra("position", -1);
         ID = in.getIntExtra("ID", -1);
         long currExpire = in.getLongExtra("expireDate",0);
+        //String storage = in.getStringExtra("Storage");
 
         //instantiate database helper
         tmpDB = new DatabaseHelper(this);
@@ -54,6 +56,19 @@ public class FoodEdit extends AppCompatActivity {
         TextView storageTV = (TextView) findViewById(R.id.editStorageTV);
         storageTV.setText(storage);
 
+        //change storage icon base on storage type
+        ImageView strImg = (ImageView) findViewById(R.id.StorageIV);
+        switch (storage) {
+            case "Frozen":
+                strImg.setImageResource(R.drawable.ic_frozen);
+                break;
+            case "Fridge":
+                strImg.setImageResource(R.drawable.ic_refrigerator);
+                break;
+            case "Room":
+                strImg.setImageResource(R.drawable.ic_temperature_inside_595b40b85ba036ed117db483);
+                break;
+        }
 
         subtractAmountET = (EditText) findViewById(R.id.subtractAmountET);
 

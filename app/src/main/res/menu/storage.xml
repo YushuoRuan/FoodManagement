@@ -18,7 +18,7 @@
 
     <item
         android:id="@+id/navigation_room"
-        android:icon="@drawable/ic_room"
+        android:icon="@drawable/ic_temperature_inside_595b40b85ba036ed117db483"
         android:title="Room" />
 
 

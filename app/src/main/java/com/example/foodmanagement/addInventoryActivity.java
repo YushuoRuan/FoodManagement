@@ -60,16 +60,10 @@ public class addInventoryActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         storeSpinner.setAdapter(adapter3);
 
-        tagSpinner = (Spinner) findViewById(R.id.addTagSpinner);
-        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this, R.array.Tags, android.R.layout.simple_spinner_item);
-        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        tagSpinner.setAdapter(adapter4);
-
 
         //Get other layout items.
         addNameET = (EditText) findViewById(R.id.addNameET);
         addAmountET = (EditText) findViewById(R.id.addAmountET);
-        addTagET = (EditText) findViewById(R.id.addTagET);
         expireCalender = (CalendarView) findViewById(R.id.expireCV);
 
         //expireDate = new Date(expireCalender.getDate());

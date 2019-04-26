@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 //pass information to next activity.
                 showFoodEdit.putExtra("position", position);
                 showFoodEdit.putExtra("ID", ingredientsTBD.get(position).ID);
+                showFoodEdit.putExtra("Storage", ingredientsTBD.get(position).getStorage());
 
                 //process date and pass to next activity.
                 String dateS = ingredientsTBD.get(position).getExpiredDate();

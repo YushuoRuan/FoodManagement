@@ -55,15 +55,10 @@ public class AddShopingListActivity extends AppCompatActivity {
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         storeSpinner.setAdapter(adapter3);
 
-        tagSpinner = (Spinner) findViewById(R.id.shopTagSpinner);
-        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this, R.array.Tags, android.R.layout.simple_spinner_item);
-        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        tagSpinner.setAdapter(adapter4);
 
         //Get Edit Texts from layout.
         addNameET = (EditText) findViewById(R.id.shopNameET);
         addAmountET = (EditText) findViewById(R.id.shopAmountET);
-        addTagET = (EditText) findViewById(R.id.shopTagET);
 
         //set event when the "add to inventory" button is clicked
         Button finalAdd = (Button) findViewById(R.id.shopFinalAddBtn);

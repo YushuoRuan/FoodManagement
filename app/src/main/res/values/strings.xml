@@ -100,6 +100,10 @@
         <item>Meat</item>
         <item>Vegetable</item>
         <item>Fruit</item>
+        <item>Beverage</item>
+        <item>Seafood</item>
+        <item>Dessert</item>
+        <item>Prepared</item>
         <item>Spice</item>
         <item>Sauce</item>
         <item>Other</item>

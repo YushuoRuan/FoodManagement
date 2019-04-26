@@ -20,44 +20,30 @@ public class ItemAdapter extends BaseAdapter {
     LayoutInflater mInflater;
 
     //avariables that can be accessed from all functions.
-    String[] names;
-    String[] amounts;
-    String[] expires;
-    String[] storages;
-    String[] units;
+    IngredientList ingredients;
+
 
     //put ingredient information into arrays.
-    public ItemAdapter(Context c, IngredientList ingredients){
-        names = new String[ingredients.size()];
-        amounts = new String[ingredients.size()];
-        expires = new String[ingredients.size()];
-        storages = new String[ingredients.size()];
-        units = new String[ingredients.size()];
-        for(int i = 0; i<ingredients.size(); i++){
-            names[i] = ingredients.get(i).getMaterial();
-            amounts[i] = Double.toString(ingredients.get(i).getAmount());
-            expires[i] = ingredients.get(i).getExpiredDate();
-            storages[i] = ingredients.get(i).getStorage();
-            units[i] = ingredients.get(i).getUnit();
-        }
+    public ItemAdapter(Context c, IngredientList i){
+        ingredients = i;
         //initialize inflater
         mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public int getCount() {
-        return names.length;
+        return ingredients.length();
     }
 
     @Override
     public Object getItem(int position) {
-        return names[position];
+        return ingredients.get(position);
     }
 
     @Override
     public long getItemId(int position) {
         //return ingredients.get(position).ID;
-        return position;
+        return ingredients.get(position).ID;
     }
 
     @Override
@@ -72,13 +58,45 @@ public class ItemAdapter extends BaseAdapter {
         TextView storageTextView = (TextView) v.findViewById(R.id.storageTV);
         ImageView foodTypeImg = (ImageView) v.findViewById(R.id.foodTypeImg);
 
+        //set image depend on food type
+        switch (ingredients.get(position).getType()) {
+            case "Meat":
+                foodTypeImg.setImageResource(R.drawable.ic_meat);
+                break;
+            case "Vegetable":
+                foodTypeImg.setImageResource(R.drawable.ic_vegetable);
+                break;
+            case "Fruit":
+                foodTypeImg.setImageResource(R.drawable.ic_fruit);
+                break;
+            case "Beverage":
+                foodTypeImg.setImageResource(R.drawable.ic_beverage);
+                break;
+            case "Seafood":
+                foodTypeImg.setImageResource(R.drawable.ic_seafood);
+                break;
+            case "Dessert":
+                foodTypeImg.setImageResource(R.drawable.ic_dessert);
+                break;
+            case "Prepared":
+                foodTypeImg.setImageResource(R.drawable.ic_prepared);
+                break;
+            case "Spice":
+                foodTypeImg.setImageResource(R.drawable.ic_spicy);
+                break;
+            case "Sauce":
+                foodTypeImg.setImageResource(R.drawable.ic_sauce);
+                break;
+            case "Other":
+                foodTypeImg.setImageResource(R.drawable.ic_launcher_foreground);
+        }
         //foodTypeImg.setImageResource(R.mipmap.meatIm);
         //extract information at position
-        String name = names[position];
-        String amount =amounts[position];
-        String expire = expires[position];
-        String storage = storages[position];
-        String unit = units[position];
+        String name = ingredients.get(position).getMaterial();
+        String amount = Double.toString(ingredients.get(position).getAmount());
+        String expire = ingredients.get(position).getExpiredDate();
+        String storage = ingredients.get(position).getStorage();
+        String unit = ingredients.get(position).getUnit();
 
         //display information in the TextViews
         DecimalFormat df = new DecimalFormat("#.##");

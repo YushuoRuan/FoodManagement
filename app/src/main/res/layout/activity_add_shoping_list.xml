@@ -185,50 +185,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="24dp" />
 
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add tags"
-                android:textColor="@color/colorAccent"
-                android:textSize="20dp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="15dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/shopTagET"
-                    android:layout_width="141dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="tag"
-                    android:inputType="textPersonName" />
-
-                <Button
-                    android:id="@+id/shopTagBtn"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Add" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="44dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-            <Spinner
-                android:id="@+id/shopTagSpinner"
-                android:layout_width="209dp"
-                android:layout_height="wrap_content" />
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
