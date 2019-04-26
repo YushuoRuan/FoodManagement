@@ -123,7 +123,7 @@ public class RecipeItemAdapter extends BaseAdapter {
         for(int i =0; i<ingredientList.length(); i++){
             Cursor res = myDb.getIngredient(ingredientList.get(i).ID);
             if(myDb.getIngredientAmountOnName(ingredientList.get(i).getMaterial())<ingredientList.get(i).getAmount()){
-                list = list + "*";
+                list = list + "*"; /*add * to the insufficient ingredient*/
             }
             list = list + res.getString(2) +
                     ":      " +

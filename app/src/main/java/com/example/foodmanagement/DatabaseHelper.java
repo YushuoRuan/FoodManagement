@@ -98,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //get total amount of same ingredients.
     public Double getIngredientAmountOnName(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select Amount from "+INVENTORY_TABLE_NAME + " where Name = '" + name + "'", null);
