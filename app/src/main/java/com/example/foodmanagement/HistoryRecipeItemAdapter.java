@@ -114,6 +114,8 @@ public class HistoryRecipeItemAdapter extends BaseAdapter {
         String list = "";
         for(int i =0; i<ingredientList.length(); i++){
             Cursor res = myDb.getIngredient(ingredientList.get(i).ID);
+            if(res.getCount()==0)
+                return "ingredient not available";
             if(myDb.getIngredientAmountOnName(ingredientList.get(i).getMaterial())<ingredientList.get(i).getAmount()){
                 list = list + "*"; /*add * to the insufficient ingredient*/
             }

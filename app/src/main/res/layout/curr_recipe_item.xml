@@ -18,8 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginStart="-18dp"
+        android:layout_marginTop="23dp"
         android:layout_toEndOf="@+id/currRecipeNameTV"
         android:text="Cuisine" />
 
@@ -28,8 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="-18dp"
+        android:layout_marginTop="46dp"
         android:layout_toEndOf="@+id/currRecipeNameTV"
         android:text="Type" />
 
@@ -40,7 +40,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="22dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="66dp"
         android:text="Ingredients:" />
 
     <TextView
@@ -50,7 +50,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="44dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginEnd="68dp"
         android:text="0/0" />
 
     <TextView
@@ -82,7 +82,7 @@
         android:layout_below="@+id/currRecipeIngredListTV"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="43dp"
+        android:layout_marginEnd="67dp"
         android:text="Cancel"
         android:textSize="12sp" />
 

@@ -120,10 +120,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(amount < 0) {
             return false;
         }
-        else if(amount == 0) {
-            deleteInventoryData(id);
-            return true;
-        }
+//        else if(amount == 0) {
+//            deleteInventoryData(id);
+//            return true;
+//        }
         else {
             db.execSQL("update " + INVENTORY_TABLE_NAME + " set Amount = " + Double.toString(amount) + " where ID = " + Integer.toString(id));
             return true;
@@ -137,8 +137,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         while (res.moveToNext()) {
             num = num - res.getDouble(3);
             if (num > 0) {
-                deleteInventoryData(res.getInt(0));
-            } else {
+                //deleteInventoryData(res.getInt(0));
+                db.execSQL("update "+INVENTORY_TABLE_NAME+" set Amount = 0 where ID = " + res.getInt(0));
+            }
+            else {
                 db.execSQL("update "+INVENTORY_TABLE_NAME+" set Amount = " + Double.toString(Math.abs(num)) + " where ID = " + res.getInt(0));
                 break;
             }
